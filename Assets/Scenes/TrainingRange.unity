@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &265186275 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1767192433, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-  m_PrefabInstance: {fileID: 391388455}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &391388455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,9 +185,19 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1578462066}
   m_SourcePrefab: {fileID: 100100000, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
---- !u!1 &468150002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1670256624, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+--- !u!4 &391388456 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1670256625, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 391388455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &391388457 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 202364688, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 391388455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &391388458 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
   m_PrefabInstance: {fileID: 391388455}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &830797159
@@ -417,9 +422,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538f192cc9d12b4db92926a94bfff38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 265186275}
-  leftArm: {fileID: 2061791416}
-  rightArm: {fileID: 468150002}
+  head: {fileID: 391388458}
+  leftArm: {fileID: 391388457}
+  rightArm: {fileID: 391388456}
+  crouchThreshold: 50
 --- !u!54 &1578462073
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -468,11 +474,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &2061791416 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 202364687, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-  m_PrefabInstance: {fileID: 391388455}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
