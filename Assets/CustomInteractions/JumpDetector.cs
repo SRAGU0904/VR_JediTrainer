@@ -1,66 +1,54 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 // https://www.youtube.com/watch?v=GRSOrkmasMM
 
 public class JumpDetector : MonoBehaviour
-{
+{    
+
     public Transform head;
-    public Transform leftArm;
-    public Transform rightArm;
-    
-    public int crouchThreshold = 50;
 
-    private static int NumberOfTrackedPositions = 100;
-    private CyclicArray<Vector3> headPositions;
-    private CyclicArray<Transform> leftArmPositions;
-    private CyclicArray<Transform> rightArmPositions;
+    public float crouchThreshold = 0.25f;
+    public float minJumpCharge = 0.75f;
+    public float maxJumpCharge = 3f;
 
-    private bool isJumping = false;
-    private bool isCrouching = false;
+    private float jumpCharge = 0f;
 
+    private LayerMask groundLayer;
+    private Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        headPositions = new CyclicArray<Vector3>(NumberOfTrackedPositions);
-        leftArmPositions = new CyclicArray<Transform>(NumberOfTrackedPositions);
-        rightArmPositions = new CyclicArray<Transform>(NumberOfTrackedPositions);
+        rb = GetComponent<Rigidbody>();
+        groundLayer = LayerMask.GetMask("Ground");
     }
-
 
     // Update is called once per frame
     void Update()
     {
-    }
-
-
-    void FixedUpdate()
-    {
-        if (!isJumping) {
-            TrackPositions();
-            if (isCrouching) {
-                if (WantsToJump()) {
-                    Jump();
-                } else {
-                    isCrouching = head.position.y < crouchThreshold;
-                }
+        if (isGrounded() && isCrouching()) {
+            Debug.Log("charging");
+            jumpCharge += Time.deltaTime;
+        } else {
+            if (jumpCharge > minJumpCharge) {
+                jumpCharge = Math.Min(jumpCharge, maxJumpCharge);
+                rb.AddForce(Vector3.up * jumpCharge, ForceMode.Impulse);
+                Debug.Log("JUMP");
             }
+            jumpCharge = 0f;
         }
     }
 
-
-    void TrackPositions() {
-        headPositions.Add(head.position);
-        leftArmPositions.Add(leftArm);
-        rightArmPositions.Add(rightArm);
+    // from https://www.youtube.com/watch?v=Xf2eDfLxcB8
+    bool isGrounded() {
+        return Physics.CheckSphere(transform.position, 0.2f, groundLayer);
     }
 
-    bool WantsToJump() {
-        return head.position.y >= crouchThreshold;
+    bool isCrouching() {
+        Ray ray = new Ray(head.position, Vector3.down);
+        RaycastHit hit;
+        return Physics.Raycast(ray, out hit, crouchThreshold, groundLayer);
     }
 
-    void Jump() {
-        // GO BANANA
-        isJumping = true;
-    }
 }
