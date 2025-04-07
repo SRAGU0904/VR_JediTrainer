@@ -8,7 +8,7 @@ public class ForceHandler : MonoBehaviour
  
     private float forceMultiplier = 250f;
     private float maxRayDistance = 500f;
-    private float velocityThreshold = 0.75f;
+    private float velocityThreshold = 0.5f;
     private float gestureCooldown = 0.25f;
 
     private InputData _inputData;
@@ -36,7 +36,16 @@ public class ForceHandler : MonoBehaviour
 
            if (lastRBHit){
                 float dot = Vector3.Dot(currentVelocity.normalized, transform.forward);
-                lastRBHit.linearVelocity = (lastRBHit.position - currentPosition) * (dot > 0 ? -1 : 1) * (currentVelocity.magnitude - velocityThreshold) * forceMultiplier * Time.deltaTime;
+                if (dot > 0)
+                {
+                    //PULL
+                    lastRBHit.linearVelocity = (currentPosition - lastRBHit.position) * (currentVelocity.magnitude - velocityThreshold) * forceMultiplier * Time.deltaTime;
+                }
+                else
+                {
+                    //PUSH
+                    lastRBHit.linearVelocity = transform.forward * (currentVelocity.magnitude - velocityThreshold) * forceMultiplier * Time.deltaTime;
+                }
            }
         }else
             lastRBHit = null;

@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 // https://www.youtube.com/watch?v=GRSOrkmasMM
 
+[RequireComponent(typeof(InputData))]
 public class JumpDetector : MonoBehaviour
-{    
+{
 
-    public Transform head;
+    private InputData _inputData;
 
     public float crouchThreshold = 0.25f;
     public float minJumpCharge = 0.75f;
@@ -22,11 +24,15 @@ public class JumpDetector : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         groundLayer = LayerMask.GetMask("Ground");
+
+        _inputData = GetComponent<InputData>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("isgrounded" + isGrounded());
+        Debug.Log("iscrouching" + isCrouching());
         if (isGrounded() && isCrouching()) {
             Debug.Log("charging");
             jumpCharge += Time.deltaTime;
@@ -46,7 +52,8 @@ public class JumpDetector : MonoBehaviour
     }
 
     bool isCrouching() {
-        Ray ray = new Ray(head.position, Vector3.down);
+        _inputData._HMD.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 pos);
+        Ray ray = new Ray(pos, Vector3.down);
         RaycastHit hit;
         return Physics.Raycast(ray, out hit, crouchThreshold, groundLayer);
     }
