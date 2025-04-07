@@ -1,14 +1,15 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR;
+using System.Collections;
 
+[RequireComponent(typeof(InputData))]
 public class BoomerangWeapon : MonoBehaviour
 {
     [Header("References")]
     public Transform rightControllerDirection;
-    public InputActionProperty throwAction;
 
     [Header("Throw Settings")]
     public float throwForce = 20f;
@@ -30,6 +31,8 @@ public class BoomerangWeapon : MonoBehaviour
     private Vector3 flyDirection;
     private float flightTimer = 0f;
 
+        private InputData _inputData;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,6 +41,8 @@ public class BoomerangWeapon : MonoBehaviour
 
         interactable.selectEntered.AddListener(OnGrab);
         interactable.selectExited.AddListener(OnRelease);
+
+         _inputData = GetComponent<InputData>();
     }
 
     void Update()
@@ -48,7 +53,9 @@ public class BoomerangWeapon : MonoBehaviour
 
     private void HandleInput()
     {
-        if (isHeld && throwAction.action != null && throwAction.action.activeControl != null && throwAction.action.WasPressedThisFrame())
+        _inputData._rightController.TryGetFeatureValue(CommonUsages.triggerButton, out bool isTriggerPressed);
+
+        if (isHeld && isTriggerPressed)
         {
             Throw();
         }
