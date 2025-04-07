@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
+<<<<<<< HEAD
   tags: []
+=======
+  tags:
+  - Lightsaber
+>>>>>>> 4aec930ae41ded58814d5fad6bf27ab59dc56501
   layers:
   - Default
   - TransparentFX
