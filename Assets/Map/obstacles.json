@@ -1,0 +1,16 @@
+{
+    "obstacles": [
+        {
+            "prefab": "Wall_Left",
+            "rarity": 0.1
+        },
+        {
+            "prefab": "Wall_Left_Long",
+            "rarity": 0.1
+        },
+        {
+            "prefab": "Wall_Right",
+            "rarity": 0.4
+        }
+    ]
+}

@@ -41,7 +41,7 @@
         "**/*.flare": true,
         "**/*.mat": true,
         "**/*.meta": true,
-        "**/*.prefab": true,
+        "**/*.prefab": false,
         "**/*.unity": true,
         "build/": true,
         "Build/": true,
@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "VR_JediTrainer.sln"
+    "dotnet.defaultSolution": "VR_JediTrainer.sln",
+    "clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4}"
 }
