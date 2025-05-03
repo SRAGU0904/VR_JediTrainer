@@ -1,53 +1,141 @@
 using UnityEngine;
 using UnityEngine.XR;
-using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(InputData))]
-public class ForceHandler : MonoBehaviour
-{
- 
-    private float forceMultiplier = 250f;
-    private float maxRayDistance = 500f;
-    private float velocityThreshold = 0.5f;
-    private float gestureCooldown = 0.25f;
-
+public class ForceHandler : MonoBehaviour{
     private InputData _inputData;
-    private float lastForceTime = -Mathf.Infinity;
-    private Rigidbody lastRBHit;
+
+    public Transform xrOrigin;
+    public LayerMask interactableLayer;
+
+    private float coneAngle = 15f;
+    private float pushForceMultiplier = 3f;
+    private float pullSpeed = 3f;
+    private float maxForceDistance = 10f;
+    private float minForcePower = 1.5f;
+    private float minPlaneDistanceFromHand = 0.75f;
+    private float maxPlaneDistanceFromHand = 10f;
+
+    private List<Rigidbody> heldObjects = new List<Rigidbody>();
+    private bool isTriggerPressed;
+    private Vector3 previousHandPosition;
+    private Vector3 currentHandVelocity;
+    private Vector3 currentHandPosition;
+    private Vector3 handForward;
+    private Vector2 joyStickAxis;
+    private float planeDistanceFromHand;
+    private float forceAmount;
 
     private void Start(){
         _inputData = GetComponent<InputData>();
+        _inputData._leftController.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 localPos);
+        previousHandPosition = xrOrigin.TransformPoint(localPos);
     }
 
     void Update(){
-        _inputData._leftController.TryGetFeatureValue(CommonUsages.triggerButton, out bool isTriggerPressed);
-        _inputData._leftController.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 currentPosition);
-        _inputData._leftController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 currentVelocity);
+        _inputData._leftController.TryGetFeatureValue(CommonUsages.triggerButton, out isTriggerPressed);
+        _inputData._leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out joyStickAxis);
+        _inputData._leftController.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 localHandPos);
 
-        if (!isTriggerPressed)
-            lastRBHit = null;
+        currentHandPosition = xrOrigin.TransformPoint(localHandPos);
+        currentHandVelocity = (currentHandPosition - previousHandPosition) / Time.deltaTime;
+        previousHandPosition = currentHandPosition;
 
-        if (isTriggerPressed && 
-            Time.time - lastForceTime > gestureCooldown && 
-            currentVelocity.magnitude > velocityThreshold){
+        handForward = transform.forward;
+        forceAmount = Vector3.Dot(currentHandVelocity, handForward);
 
-            if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxRayDistance))
-                lastRBHit = hit.rigidbody;
+        if (isTriggerPressed){
+            if(Mathf.Abs(forceAmount) >= minForcePower){
+                UseTheForce();
+            }
+            ForcePullHeldObjects();
+        }else{
+            ReleaseHeldObjects();
+        }
+    }
 
-           if (lastRBHit){
-                float dot = Vector3.Dot(currentVelocity.normalized, transform.forward);
-                if (dot > 0)
-                {
-                    //PULL
-                    lastRBHit.linearVelocity = (currentPosition - lastRBHit.position) * (currentVelocity.magnitude - velocityThreshold) * forceMultiplier * Time.deltaTime;
+    void UseTheForce(){
+        Collider[] hits = Physics.OverlapSphere(currentHandPosition, maxForceDistance, interactableLayer);
+
+        foreach (Collider hit in hits){
+
+            Vector3 dirToObj = (hit.transform.position - currentHandPosition).normalized;
+            if (Vector3.Angle(handForward, dirToObj) < coneAngle){
+               if (forceAmount >= minForcePower && heldObjects.Count == 0)
+                  ForcePush(hit);
+               else
+                  AddObjectToHeldObjects(hit);
+            }
+        }
+    }
+    void ForcePush(Collider hit){
+        Rigidbody rb = hit.attachedRigidbody;
+        if(rb != null){
+            Vector3 forceDir = (hit.transform.position - currentHandPosition).normalized;
+            rb.AddForce(forceDir * currentHandVelocity.magnitude * pushForceMultiplier, ForceMode.Impulse);
+        }
+    }
+
+    void AddObjectToHeldObjects(Collider hit) { 
+        Rigidbody rb = hit.attachedRigidbody;
+        if (rb != null && !heldObjects.Contains(rb)){
+            rb.useGravity = false;
+            heldObjects.Add(rb);
+        }
+    }
+
+    Vector2 GetObjectPlaneOffset(int index){
+        if (heldObjects.Count <= 1)
+            return Vector2.zero;
+
+        float radius = 0.3f;
+        float angleStep = 360f / heldObjects.Count;
+        float angle = angleStep * index;
+        float rad = angle * Mathf.Deg2Rad;
+
+        return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * radius;
+    }
+
+    void updatePlaneDistanceFromHand(){
+        if (joyStickAxis.y > 0.1 && planeDistanceFromHand < maxPlaneDistanceFromHand ||
+            joyStickAxis.y < -0.1 && planeDistanceFromHand > minPlaneDistanceFromHand)
+            planeDistanceFromHand += joyStickAxis.y * 3f * Time.deltaTime;
+    }
+
+    void ForcePullHeldObjects(){
+        updatePlaneDistanceFromHand();
+        Vector3 planeOrigin = currentHandPosition + handForward * planeDistanceFromHand;
+        Vector3 handRight = transform.right;
+        Vector3 handUp = transform.up;
+
+        for (int i = 0; i < heldObjects.Count; i+=1){
+
+            Rigidbody rb = heldObjects[i];
+            if (rb != null) {
+                Vector2 planeOffset = GetObjectPlaneOffset(i);
+                Vector3 localOffset = handRight * planeOffset.x + handUp * planeOffset.y;
+                Vector3 targetWorldPos = planeOrigin + localOffset;
+                Vector3 toTarget = targetWorldPos - rb.position;
+
+                rb.linearVelocity = toTarget * pullSpeed;
+
+                if (forceAmount > minForcePower){
+                    rb.AddForce(handForward * currentHandVelocity.magnitude * pushForceMultiplier, ForceMode.Impulse);
+                    rb.useGravity = true;
+                    heldObjects.RemoveAt(i);
                 }
-                else
-                {
-                    //PUSH
-                    lastRBHit.linearVelocity = transform.forward * (currentVelocity.magnitude - velocityThreshold) * forceMultiplier * Time.deltaTime;
-                }
-           }
-        }else
-            lastRBHit = null;
+            }
+        }
+    }
+
+    void ReleaseHeldObjects(){
+        planeDistanceFromHand = minPlaneDistanceFromHand;
+        foreach (var rb in heldObjects){
+            if (rb != null){
+                rb.useGravity = true;
+            }
+        }
+        heldObjects.Clear();
     }
 }
