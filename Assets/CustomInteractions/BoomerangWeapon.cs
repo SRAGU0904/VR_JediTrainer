@@ -3,6 +3,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR;
+using System;
 
 [RequireComponent(typeof(InputData))]
 public class BoomerangWeapon : MonoBehaviour
@@ -40,6 +41,8 @@ public class BoomerangWeapon : MonoBehaviour
     private XRGrabInteractable interactable;
     private IXRSelectInteractor interactor;
     private InputData _inputData;
+
+    public float requiredThrowForce;
 
     // === Initialization ===
     void Start()
@@ -161,6 +164,10 @@ public class BoomerangWeapon : MonoBehaviour
     // === Core throwing logic ===
     private void Throw()
     {
+        _inputData._rightController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 localVelocity);
+        _inputData._rightController.TryGetFeatureValue(CommonUsages.deviceAngularVelocity, out Vector3 angularVel);
+        if (Math.Abs(angularVel.x) < requiredThrowForce) return; 
+
         if (interactor != null && interactable.interactionManager != null)
         {
             interactable.interactionManager.SelectExit(interactor, interactable);
@@ -176,30 +183,33 @@ public class BoomerangWeapon : MonoBehaviour
         rb.angularDamping = 0f;
 
         // Read controller velocity
-        _inputData._rightController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 localVelocity);
-        _inputData._rightController.TryGetFeatureValue(CommonUsages.deviceAngularVelocity, out Vector3 angularVel);
+
 
         Vector3 controllerVelocity = rightControllerDirection.TransformDirection(localVelocity);
 
         float controllerSpeed = controllerVelocity.magnitude;
-        float speedMultiplier = 8f;
+        float speedMultiplier = 2f;
         float minSpeed = 5f;
 
         // Decide throw direction and speed
-        if (controllerVelocity.magnitude > 0.1f)
-        {
-            flyDirection = controllerVelocity.normalized;
-            initialThrowSpeed = Mathf.Pow(controllerSpeed, 1.2f) * speedMultiplier;
-        }
-        else
-        {
-            flyDirection = rightControllerDirection.forward;
-            initialThrowSpeed = minSpeed;
-        }
+        // if (controllerVelocity.magnitude > 0.1f)
+        // {
+        //     flyDirection = controllerVelocity.normalized;
+        //     initialThrowSpeed = Mathf.Pow(controllerSpeed, 1.2f) * speedMultiplier;
+        // }
+        // else
+        // {
+        //     flyDirection = rightControllerDirection.forward;
+        //     initialThrowSpeed = minSpeed;
+        // }
+
+        flyDirection = (rightControllerDirection.forward + rightControllerDirection.up).normalized;
+        initialThrowSpeed = controllerSpeed * speedMultiplier;
+        initialThrowSpeed = minSpeed; // TODO: use magnitude
 
         rb.linearVelocity = flyDirection * initialThrowSpeed;
 
-        spinAxis = flyDirection;
+        spinAxis = rightControllerDirection.right;
 
         // Initial spin
         rb.AddTorque(spinAxis * spinTorque, ForceMode.Impulse);
