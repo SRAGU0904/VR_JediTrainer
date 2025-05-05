@@ -4,14 +4,14 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR;
 using System;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(InputData))]
 public class BoomerangWeapon : MonoBehaviour
 {
     [Header("References")]
     public Transform rightControllerDirection;   // The direction reference from the right controller
-    [Header("XR Rig Reference")]
-    public Transform xrOrigin;                   // XR Rig
+    public InputActionReference throwAction;
 
     [Header("Throw Settings")]
     public float returnDelay = 1.5f;              // Time after throw before returning
@@ -72,21 +72,28 @@ public class BoomerangWeapon : MonoBehaviour
     // === Per-frame Update ===
     void Update()
     {
-        HandleInput();
         HandleMovement();
     }
 
-    // === Handle input ===
-    private void HandleInput()
-    {
-        bool isAPressed = false;
-        _inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out isAPressed);
+    void OnEnable() {
+        throwAction.action.Enable();
+        throwAction.action.performed += HandleInput;
+    }
 
-        if (isHeld && isAPressed && !isThrowScheduled)
-        {
-            isThrowScheduled = true;
-            Invoke(nameof(DelayedThrow), throwDelay);
-            Debug.Log("[BOOMERANG DEBUG] Throw scheduled after delay");
+    void OnDisable() {
+        throwAction.action.Disable();
+        throwAction.action.performed -= HandleInput;
+    }
+
+    // === Handle input ===
+    private void HandleInput(InputAction.CallbackContext context) {
+        if (context.performed) {
+            if (isHeld && !isThrowScheduled)
+            {
+                isThrowScheduled = true;
+                Invoke(nameof(DelayedThrow), throwDelay);
+                Debug.Log("[BOOMERANG DEBUG] Throw scheduled after delay");
+            }
         }
     }
 
@@ -164,8 +171,8 @@ public class BoomerangWeapon : MonoBehaviour
     // === Core throwing logic ===
     private void Throw()
     {
-        _inputData._rightController.TryGetFeatureValue(CommonUsages.deviceVelocity, out Vector3 localVelocity);
-        _inputData._rightController.TryGetFeatureValue(CommonUsages.deviceAngularVelocity, out Vector3 angularVel);
+        _inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceVelocity, out Vector3 localVelocity);
+        _inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceAngularVelocity, out Vector3 angularVel);
         if (Math.Abs(angularVel.x) < requiredThrowForce) return; 
 
         if (interactor != null && interactable.interactionManager != null)
@@ -271,5 +278,9 @@ public class BoomerangWeapon : MonoBehaviour
         transform.SetParent(rightControllerDirection);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+    }
+
+    public bool IsHeld() {
+        return isHeld;
     }
 }

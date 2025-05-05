@@ -19761,10 +19761,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightControllerDirection: {fileID: 391388456}
-  accelerationTime: 1
+  xrOrigin: {fileID: 0}
   returnDelay: 1.5
   spinTorque: 300
   minFlyTime: 0.5
+  throwDelay: 0.07
+  returnAcceleration: 10
+  requiredThrowForce: 8
 --- !u!136 &2026807143
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
 // https://www.youtube.com/watch?v=GRSOrkmasMM
@@ -9,6 +10,8 @@ using UnityEngine.XR;
 [RequireComponent(typeof(PhysicalCharacterController))]
 public class JumpDetector : MonoBehaviour {
 
+    public InputActionReference jumpButton;
+    public InputActionReference setCrouchThresholdButton;
     public float crouchThreshold = 0.25f;
     public float maxJumpHeight = 3.0f;
     public float minJumpCharge = 0.25f;
@@ -23,19 +26,28 @@ public class JumpDetector : MonoBehaviour {
         _physicalCharacterController = GetComponent<PhysicalCharacterController>();
     }
 
+    void OnEnable() {
+        jumpButton.action.Enable();
+        setCrouchThresholdButton.action.Enable();
+        setCrouchThresholdButton.action.performed += SetCrouchThreshold;
+    }
+
+    void OnDisable() {
+        jumpButton.action.Disable();
+        setCrouchThresholdButton.action.Disable();
+        setCrouchThresholdButton.action.performed -= SetCrouchThreshold;
+    }
+
+    private void SetCrouchThreshold(InputAction.CallbackContext context) {
+        if (context.performed) {
+            _inputData._HMD.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition, out Vector3 currentPosition);
+            crouchThreshold = currentPosition.y;            
+        }
+    }
+
     // Update is called once per frame
     void Update() {
-        // Update crouch threshold
-        _inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool isTriggerPressed);
-        if (isTriggerPressed) {
-            _inputData._HMD.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 currentPosition);
-            crouchThreshold = currentPosition.y;
-        }
-
-
-        // Update crouch threshold
-        _inputData._rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool isTriggerPressed2);
-        if (_physicalCharacterController.IsGrounded() && IsCrouching() && isTriggerPressed2) {
+        if (_physicalCharacterController.IsGrounded() && IsCrouching() && jumpButton.action.IsPressed()) {
             jumpCharge += Time.deltaTime;
         }
         else {
@@ -48,7 +60,7 @@ public class JumpDetector : MonoBehaviour {
     }
 
     bool IsCrouching() {
-        _inputData._HMD.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 pos);
+        _inputData._HMD.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition, out Vector3 pos);
         return pos.y <= crouchThreshold;
     }
 

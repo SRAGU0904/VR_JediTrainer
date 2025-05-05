@@ -1,5 +1,5 @@
 {
-    "name": "XRI Default Input Actions",
+    "name": "Input Actions",
     "maps": [
         {
             "name": "XRI Head",
@@ -452,6 +452,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Jump Button",
+                    "type": "Button",
+                    "id": "bae1de16-80b2-4d60-a143-597a726735ab",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Set Crouch Threshold",
+                    "type": "Button",
+                    "id": "39638101-8bab-48c5-800f-ecba1f2bd743",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -859,6 +877,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thumbstick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96f04a31-620a-42cd-ab4d-48f05ac67f10",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d277c180-695b-4856-b5e7-73b3a8c77ec7",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Set Crouch Threshold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1525,9 +1565,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Toggle Lighsaber",
+                    "name": "Toggle Lightsaber",
                     "type": "Button",
                     "id": "333f73e8-925b-4a35-b9af-0ec3b7080fea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Throw Lightsaber",
+                    "type": "Button",
+                    "id": "4d878a8a-d5f5-4d1b-b12f-970c03c8fbed",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1945,11 +1994,22 @@
                 {
                     "name": "",
                     "id": "aa062348-1804-45c6-bbc0-e541e495d9e1",
-                    "path": "*/{SecondaryButton}",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Toggle Lighsaber",
+                    "action": "Toggle Lightsaber",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60d6e8b9-eab1-4903-a49f-d8b13630f7b9",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw Lightsaber",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
