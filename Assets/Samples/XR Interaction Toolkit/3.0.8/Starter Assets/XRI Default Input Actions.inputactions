@@ -1523,15 +1523,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Toggle Lighsaber",
-                    "type": "Button",
-                    "id": "333f73e8-925b-4a35-b9af-0ec3b7080fea",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1939,17 +1930,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thumbstick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aa062348-1804-45c6-bbc0-e541e495d9e1",
-                    "path": "*/{SecondaryButton}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Toggle Lighsaber",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
