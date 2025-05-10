@@ -60,12 +60,10 @@ public class BoomerangWeapon : MonoBehaviour
         {
             isHeld = true;
             interactor = interactable.firstInteractorSelecting;
-            Debug.Log("[BOOMERANG DEBUG] Start: Boomerang is initially held");
         }
         else
         {
             isHeld = false;
-            Debug.Log("[BOOMERANG DEBUG] Start: Boomerang not held");
         }
     }
 
@@ -171,65 +169,75 @@ public class BoomerangWeapon : MonoBehaviour
     // === Core throwing logic ===
     private void Throw()
     {
+	    // Get controller velocity and angular velocity from input
         _inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceVelocity, out Vector3 localVelocity);
         _inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceAngularVelocity, out Vector3 angularVel);
-        if (Math.Abs(angularVel.x) < requiredThrowForce) return; 
+        // if (Math.Abs(angularVel.x) < requiredThrowForce) return; 
 
+        // Read controller velocity
+        // Convert local velocity to world space
+        Vector3 controllerVelocity = rightControllerDirection.TransformDirection(localVelocity);
+        float controllerSpeed = controllerVelocity.magnitude;
+        float speedThreshold = 0.3f;
+        
+        // Only allow throwing if speed is above threshold
+        if (controllerSpeed <= speedThreshold)
+        {
+	        Debug.Log("[BOOMERANG DEBUG] Throw cancelled: speed too low");
+	        return;
+        }
+        
+        // Force deselection of the interactable
         if (interactor != null && interactable.interactionManager != null)
         {
-            interactable.interactionManager.SelectExit(interactor, interactable);
+	        interactable.interactionManager.SelectExit(interactor, interactable);
         }
-
         isHeld = false;
         canSetHeld = true;
         transform.SetParent(null);
-
+        
+        // Prepare rigidbody for physics-based movement
         rb.isKinematic = false;
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.None;
         rb.angularDamping = 0f;
 
-        // Read controller velocity
-
-
-        Vector3 controllerVelocity = rightControllerDirection.TransformDirection(localVelocity);
-
-        float controllerSpeed = controllerVelocity.magnitude;
-        float speedMultiplier = 2f;
-        float minSpeed = 5f;
-
-        // Decide throw direction and speed
-        // if (controllerVelocity.magnitude > 0.1f)
-        // {
-        //     flyDirection = controllerVelocity.normalized;
-        //     initialThrowSpeed = Mathf.Pow(controllerSpeed, 1.2f) * speedMultiplier;
-        // }
-        // else
-        // {
-        //     flyDirection = rightControllerDirection.forward;
-        //     initialThrowSpeed = minSpeed;
-        // }
-
-        flyDirection = (rightControllerDirection.forward + rightControllerDirection.up).normalized;
-        initialThrowSpeed = controllerSpeed * speedMultiplier;
-        initialThrowSpeed = minSpeed; // TODO: use magnitude
-
+        // Use the rightControllerDirection forward as the flying direction
+        flyDirection = rightControllerDirection.forward;
+        float speedMultiplier = 8f;
+        initialThrowSpeed = Mathf.Pow(controllerSpeed, 1.2f) * speedMultiplier;
         rb.linearVelocity = flyDirection * initialThrowSpeed;
+        
+        if (controllerSpeed > speedThreshold)
+        {
+	        Vector3 motionDir = controllerVelocity.normalized;
 
-        spinAxis = rightControllerDirection.right;
+	        // The axis of rotation should be perpendicular to both the flight direction and the swinging direction.
+	        spinAxis = Vector3.Cross(flyDirection, motionDir).normalized;
 
-        // Initial spin
-        rb.AddTorque(spinAxis * spinTorque, ForceMode.Impulse);
+	        if (spinAxis == Vector3.zero || float.IsNaN(spinAxis.x))
+	        {
+		        // When the cross product approaches zero, use the upward direction of the controller as the rotation axis.
+		        spinAxis = rightControllerDirection.up;
+	        }
 
+	        rb.inertiaTensor = Vector3.one;
+	        rb.inertiaTensorRotation = Quaternion.identity;
+	        rb.angularVelocity = spinAxis * 50f;
+
+	        //Debug
+	        Debug.Log($"[DEBUG] flyDir: {flyDirection}, motionDir: {motionDir}, spinAxis: {spinAxis}");
+        }
+
+        // Initialize flight state
         flightTimer = 0f;
         isFlyingOut = true;
         col.enabled = true;
 
+        // Set up return timing
         canReturn = false;
         Invoke(nameof(EnableReturn), minFlyTime);
         Invoke(nameof(StartReturn), returnDelay);
-
-        Debug.Log($"[BOOMERANG DEBUG] Thrown. Direction: {flyDirection}, Speed: {initialThrowSpeed}");
     }
 
     // === Enable returning after minFlyTime ===

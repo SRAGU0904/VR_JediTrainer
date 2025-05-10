@@ -2650,7 +2650,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2049d4b25769a574b880613718ee2170, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5322,7 +5321,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2049d4b25769a574b880613718ee2170, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5536,9 +5534,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44d702885f7904a4da0f3019606d67e8, type: 2}
-  - {fileID: 2100000, guid: 87bbbbc4e62f77446837f3f611a44030, type: 2}
-  - {fileID: 2100000, guid: c108855543c331e41ac5141d297882fe, type: 2}
+  - {fileID: 2100000, guid: a5bb8d1c914cb3848896d642e833d282, type: 2}
+  - {fileID: 2100000, guid: 78b1e108c3e70ad4291143342a620e30, type: 2}
+  - {fileID: 2100000, guid: fa21bf3143962d14db8c1465392e1311, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5563,7 +5561,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: 05adf92ed2eba864a8a86022386e97d2, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ffea1cdbb2ff1d949875f3ae7423f313, type: 3}
   m_Bones: []
   m_BlendShapeWeights:
   - 100
@@ -5581,8 +5579,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3166937823728936813}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 05adf92ed2eba864a8a86022386e97d2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 576ab35ea777de24dbd73935b2a395c0, type: 2}
+  m_Avatar: {fileID: 9000000, guid: ffea1cdbb2ff1d949875f3ae7423f313, type: 3}
+  m_Controller: {fileID: 9100000, guid: 640aa286eaebd814baf8a1ef753367b6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5649,8 +5647,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c9bee02f376ae5d40b0a5af1efd67f5a, type: 3}
-  m_Resource: {fileID: 8300000, guid: c9bee02f376ae5d40b0a5af1efd67f5a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 83395fcd3ce10ca4496ae5264ace7fb5, type: 3}
+  m_Resource: {fileID: 8300000, guid: 83395fcd3ce10ca4496ae5264ace7fb5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.554
   m_Pitch: 1
@@ -8466,8 +8464,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 543ad34384e9263438748bc60f75d031, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 6d846ca57b2c75d46875598380f4dc77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11008,8 +11005,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 543ad34384e9263438748bc60f75d031, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 6d846ca57b2c75d46875598380f4dc77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13550,8 +13546,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 543ad34384e9263438748bc60f75d031, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 6d846ca57b2c75d46875598380f4dc77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
