@@ -76,4 +76,5 @@ crashlytics-build.properties
 .utmp
 
 # MacOS
-.DS_Store
+.DS_Store*.log 
+replay_*.log 
