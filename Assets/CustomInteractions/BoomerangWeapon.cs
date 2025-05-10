@@ -13,10 +13,10 @@ public class BoomerangWeapon : MonoBehaviour
 
     [Header("Throw Settings")]
     public float throwForce = 20f;
-    public float accelerationTime = 0.5f;
-    public float returnDelay = 2f;
-    public float spinTorque = 5000f;
-    public float minFlyTime = 0.2f;
+    public float accelerationTime = 1.0f;
+    private float returnDelay = 2f;
+    private float spinTorque = 5000f;
+    private float minFlyTime = 0.2f;
 
     private Rigidbody rb;
     private Collider col;
