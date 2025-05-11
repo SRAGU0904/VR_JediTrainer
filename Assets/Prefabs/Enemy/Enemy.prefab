@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -65,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 3.972
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalRotation.w
@@ -105,6 +109,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1536175786780746316}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8757232615574513862}
   m_SourcePrefab: {fileID: 100100000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
 --- !u!4 &7095913961676293236 stripped
 Transform:
@@ -133,3 +140,28 @@ MonoBehaviour:
   target: {fileID: 0}
   minDelay: 1
   maxDelay: 2
+  minForwardDistance: 1
+  maxForwardDistance: 2
+--- !u!136 &-8757232615574513862
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7095913961676396628}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.169315
+  m_Height: 8.677261
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 1.003018}
