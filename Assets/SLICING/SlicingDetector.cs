@@ -11,6 +11,7 @@ public class SlicingDetector : MonoBehaviour {
 	public Transform slicerEndEffector;
 	public SliceMeshBuilder sliceMeshBuilder;
 	public GameObject objectToSlice;
+	public Material sliceMaterial = null;
 	
 	private bool currentlySlicing = false;
 	private bool previouslySlicing = false;
@@ -40,7 +41,7 @@ public class SlicingDetector : MonoBehaviour {
 			Vector3 BR = sliceLineList.Last()[0];
 			Vector3 TL = sliceLineList.First()[1];
 			Vector3 TR = sliceLineList.Last()[1];
-			if (SliceKnife.SliceWithCorners(objectToSlice, BL, BR, TR, TL, true, true, true) != null) {
+			if (SliceKnife.SliceWithCorners(objectToSlice, BL, BR, TR, TL, true, true, true, sliceMaterial) != null) {
 				Debug.Log("Sliced!");
 			}
 		}
