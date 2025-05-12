@@ -1,16 +1,27 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SliceMeshBuilder : MonoBehaviour
 {
-
+	public bool lowRes = false;
+	
 	public void SetMesh(List<Vector3[]> lines)
 	{
+		if (lines.Count == 0) {
+			return;
+		}	
+		if (lowRes) {
+			List<Vector3[]> newLines = new List<Vector3[]>();
+			newLines.Add(lines.First());
+			newLines.Add(lines.Last());
+			lines = newLines;
+		}
 		Mesh mesh = BuildMeshFromLines(lines);
 		GetComponent<MeshFilter>().mesh = mesh;
 		GetComponent<MeshRenderer>().material = new Material(Shader.Find("Standard"));
 	}
-
+	
 	private Mesh BuildMeshFromLines(List<Vector3[]> lines)
 	{
 		List<Vector3> vertices = new List<Vector3>();
