@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR;
 
 // https://www.youtube.com/watch?v=GRSOrkmasMM
 // https://www.youtube.com/watch?v=Mfim9MlgYWY
@@ -8,7 +7,7 @@ using UnityEngine.XR;
 
 [RequireComponent(typeof(InputData))]
 [RequireComponent(typeof(PhysicalCharacterController))]
-public class JumpDetector : MonoBehaviour {
+public class Jump : MonoBehaviour {
 
     public InputActionReference jumpButton;
     public InputActionReference setCrouchThresholdButton;

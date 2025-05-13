@@ -3,14 +3,16 @@ using UnityEngine;
 // https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
 public class PhysicalCharacterController : MonoBehaviour {
     private CharacterController controller;
-    private Vector3 playerVelocity;
+    public Vector3 playerVelocity;
 
     public float zVelocity = 1f;
 
-    private float gravityValue = -9.81f;
+    public float gravityValue = -9.81f;
+    private float defaultGravity;
 
     private void Start() {
         controller = gameObject.GetComponent<CharacterController>();
+        defaultGravity = gravityValue;
     }
 
     void Update() {
@@ -34,5 +36,9 @@ public class PhysicalCharacterController : MonoBehaviour {
 
     public bool IsGrounded() {
         return controller.isGrounded;
+    }
+
+    public void ResetGravity() {
+        gravityValue = defaultGravity;
     }
 }

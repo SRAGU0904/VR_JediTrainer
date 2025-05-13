@@ -470,6 +470,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Banana",
+                    "type": "Value",
+                    "id": "9af50edc-1406-47b6-a1d7-98b3084cd652",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -899,6 +908,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Set Crouch Threshold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0994174-1d73-4659-95ac-14284c2d3f8c",
+                    "path": "<XRController>{LeftHand}/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Banana",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -3409,6 +3429,56 @@
                     "processors": "",
                     "groups": "",
                     "action": "Spawn Object",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Composite",
+            "id": "d1ac6636-50f2-46fe-afe0-78539f4a7f54",
+            "actions": [
+                {
+                    "name": "Levitate",
+                    "type": "Button",
+                    "id": "8402e5a1-f9c1-4e2f-bb52-185d7bc754b5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "One Modifier",
+                    "id": "da8dc5bc-a892-4a6b-80e2-45a8d79b131d",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Levitate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "8efc0be6-9ee5-4ede-a5e4-1ee2e3b441d2",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Levitate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "0b038438-4cfa-4ba6-83a3-a5470cdc0cfd",
+                    "path": "<XRController>{RightHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Levitate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
