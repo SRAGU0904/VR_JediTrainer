@@ -56,7 +56,7 @@ public class Quadrilateral {
 				yield return hitCollider.gameObject;
 			}
 		}
-		GameObjectDestroyer.DestroyGameObject(quadGo);
+		// GameObjectDestroyer.DestroyGameObject(quadGo);
 	}
 }
 

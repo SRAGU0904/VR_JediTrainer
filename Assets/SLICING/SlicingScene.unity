@@ -295,12 +295,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocityTracker: {fileID: 182133197}
-  angVelocityThreshold: 3
+  angVelocityThreshold: 7
   slicerBeginEffector: {fileID: 1016402218}
   slicerEndEffector: {fileID: 843253703}
-  sliceMeshBuilder: {fileID: 182133200}
-  objectToSlice: {fileID: 867432446}
   sliceMaterial: {fileID: 2100000, guid: c4a96baab73b14709a5b6f70403801a9, type: 2}
+  pushForce: 1
 --- !u!114 &182133200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,9 +654,10 @@ GameObject:
   - component: {fileID: 867432448}
   - component: {fileID: 867432447}
   - component: {fileID: 867432451}
+  - component: {fileID: 867432452}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: SliceTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -778,6 +778,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &867432452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867432446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0164f635750f04b1c93a5209bc2966b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceDecayPerSec: 0.7
+  magnitudeZero: 0.1
 --- !u!1 &1016402217
 GameObject:
   m_ObjectHideFlags: 0
