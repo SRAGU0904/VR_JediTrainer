@@ -20,8 +20,8 @@ public class SliceKnife : MonoBehaviour {
 		GameObject[] objects =  objectToSlice.SliceInstantiate(planeCenter, planeNormal);
 		if (objects != null) {
 			if (addColider) {
-				AddMeshCollider(objects[0]);
-				AddMeshCollider(objects[1]);
+				MeshUtils.AddMeshCollider(objects[0]);
+				MeshUtils.AddMeshCollider(objects[1]);
 			}
 			if (addRigidbodies) {
 				AddRigidbody(objects[0]);
@@ -50,10 +50,5 @@ public class SliceKnife : MonoBehaviour {
 		rb.isKinematic = false;
 		rb.interpolation = RigidbodyInterpolation.Interpolate;
 		rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-	}
-
-	private static void AddMeshCollider(GameObject go) {
-		MeshCollider mc = go.AddComponent<MeshCollider>();
-		mc.convex = true;
 	}
 }
