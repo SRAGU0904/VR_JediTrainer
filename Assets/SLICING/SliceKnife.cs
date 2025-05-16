@@ -7,11 +7,8 @@ using UnityEngine;
 
 public class SliceKnife : MonoBehaviour {
 	[CanBeNull]
-	public static GameObject[] SliceWithCorners(GameObject objectToSlice, Vector3 BLCorner, Vector3 BRCorner,
-		Vector3 TRCorner, Vector3 TLCorner, bool addColider = true, bool addRigidbodies = true, bool destroyOriginal = true, Material sliceMaterial = null) {
-		Vector3 planeCenter = (BLCorner + BRCorner + TRCorner + TLCorner) / 4;
-		Vector3 planeNormal = Vector3.Cross(TRCorner - BLCorner, TLCorner - BRCorner).normalized;
-		return SliceWithNormals(objectToSlice, planeCenter, planeNormal, addColider, addRigidbodies, destroyOriginal, sliceMaterial);
+	public static GameObject[] SliceWithCorners(GameObject objectToSlice, Quadrilateral quadrilateral, bool addColider = true, bool addRigidbodies = true, bool destroyOriginal = true, Material sliceMaterial = null) {
+		return SliceWithNormals(objectToSlice, quadrilateral.center, quadrilateral.normal, addColider, addRigidbodies, destroyOriginal, sliceMaterial);
 	}
 
 	[CanBeNull]
@@ -23,16 +20,16 @@ public class SliceKnife : MonoBehaviour {
 		GameObject[] objects =  objectToSlice.SliceInstantiate(planeCenter, planeNormal);
 		if (objects != null) {
 			if (addColider) {
-				addMeshCollider(objects[0]);
-				addMeshCollider(objects[1]);
+				AddMeshCollider(objects[0]);
+				AddMeshCollider(objects[1]);
 			}
 			if (addRigidbodies) {
-				addRigidbody(objects[0]);
-				addRigidbody(objects[1]);
+				AddRigidbody(objects[0]);
+				AddRigidbody(objects[1]);
 			}
 			if (sliceMaterial) {
-				updateMaterial(objects[0].GetComponent<MeshRenderer>(), ^1, sliceMaterial); 
-				updateMaterial(objects[1].GetComponent<MeshRenderer>(), ^1, sliceMaterial);
+				UpdateMaterial(objects[0].GetComponent<MeshRenderer>(), ^1, sliceMaterial); 
+				UpdateMaterial(objects[1].GetComponent<MeshRenderer>(), ^1, sliceMaterial);
 			}
 			if (destroyOriginal) {
 				Destroy(objectToSlice);
@@ -41,24 +38,22 @@ public class SliceKnife : MonoBehaviour {
 		return objects;
 	}
 
-	public static void updateMaterial(MeshRenderer mr, Index i, Material mat) {
+	private static void UpdateMaterial(MeshRenderer mr, Index i, Material mat) {
 		Material[] mats = mr.materials;
 		mats[i] = mat;
 		mr.SetMaterials(mats.ToList());
 	}
 
-	public static void addRigidbody(GameObject go) {
+	private static void AddRigidbody(GameObject go) {
 		Rigidbody rb = go.AddComponent<Rigidbody>();
 		rb.useGravity = true;
 		rb.isKinematic = false;
 		rb.interpolation = RigidbodyInterpolation.Interpolate;
 		rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 	}
-	
-	public static void addMeshCollider(GameObject go) {
+
+	private static void AddMeshCollider(GameObject go) {
 		MeshCollider mc = go.AddComponent<MeshCollider>();
 		mc.convex = true;
 	}
-	
-	
 }

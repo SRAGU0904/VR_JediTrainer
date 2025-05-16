@@ -9,17 +9,13 @@ public class SlicingDetector : MonoBehaviour {
 	public float angVelocityThreshold = 5f;
 	public Transform slicerBeginEffector;
 	public Transform slicerEndEffector;
-	public SliceMeshBuilder sliceMeshBuilder;
 	public GameObject objectToSlice;
 	public Material sliceMaterial = null;
 	
 	private bool currentlySlicing = false;
 	private bool previouslySlicing = false;
-	private List<Vector3[]> sliceLineList;
-
-	private void Start() {
-		sliceLineList = new List<Vector3[]>();
-	}
+	
+	private List<Vector3[]> sliceLineList = new List<Vector3[]>();
 	
 	void FixedUpdate() {
 		if (checkSlicing()) {
@@ -35,13 +31,15 @@ public class SlicingDetector : MonoBehaviour {
 
 	private void onSlicingStop() {
 		Debug.Log("Slicing stopped!");
-		sliceMeshBuilder.SetMesh(sliceLineList);
-		if (sliceLineList.Count > 0) {
-			Vector3 BL = sliceLineList.First()[0];
-			Vector3 BR = sliceLineList.Last()[0];
-			Vector3 TL = sliceLineList.First()[1];
-			Vector3 TR = sliceLineList.Last()[1];
-			if (SliceKnife.SliceWithCorners(objectToSlice, BL, BR, TR, TL, true, true, true, sliceMaterial) != null) {
+		if (sliceLineList.Count >= 2) {
+			Quadrilateral quad = new Quadrilateral( 
+				sliceLineList.First()[0], 
+				sliceLineList.Last()[0], 
+				sliceLineList.Last()[1], 
+				sliceLineList.First()[1]
+				);
+			
+			if (SliceKnife.SliceWithCorners(objectToSlice, quad, true, true, true, sliceMaterial) != null) {
 				Debug.Log("Sliced!");
 			}
 		}
