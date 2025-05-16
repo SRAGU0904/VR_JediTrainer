@@ -46,6 +46,16 @@ public class Quadrilateral {
 		);
 	}
 
+	public void Render() {
+		GameObject quadGo = new GameObject("Quadrilateral");
+		MeshFilter mf = quadGo.AddComponent<MeshFilter>();
+		mf.mesh = CreateMesh();
+		MeshRenderer mr = quadGo.AddComponent<MeshRenderer>();
+		mr.material = new Material(Shader.Find("Sprites/Default"));
+		mr.material.color = new Color(0.5f, 0.5f, 0.5f, 0.1f);
+		
+	}
+
 	public IEnumerable<GameObject> GetCollisions(string tagFilter) {
 		GameObject quadGo = MeshUtils.CreateGameObject(CreateMesh());
 		MeshCollider mc = MeshUtils.AddMeshCollider(quadGo);
