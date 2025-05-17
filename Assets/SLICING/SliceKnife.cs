@@ -10,11 +10,10 @@ public class SliceKnife : MonoBehaviour {
 
 	public static bool addColider = true;
 	public static bool addRigidbodies = true;
-	public static float limitVelocity = 0.1f; 
 	public static Material sliceMaterial = null;
 	public static float pushForceMagnitude = 0f;
 	public static float pushInitialInSeconds = 0.5f;
-	public static int sliceCountLimit = 100;
+	public static int sliceCountLimit = 4;
 	
 	[CanBeNull]
 	public static GameObject[] Slice(GameObject objectToSlice, Quadrilateral quadrilateral){
@@ -29,16 +28,13 @@ public class SliceKnife : MonoBehaviour {
 			return null;
 		}
 		Vector3 _workaroundShift = workaroundShift(objectToSlice, hulls);
-		Vector3[] targetHullPositions = hulls.Select(go => go.transform.position - _workaroundShift).ToArray();
-		Debug.Log($"workaround shift: {_workaroundShift}");
-		Debug.Log($"original {objectToSlice.transform.position}");
 		Destroy(objectToSlice);
-		foreach ((GameObject hull, Vector3 targetPos) in hulls.Zip(targetHullPositions, Tuple.Create)) {
+		foreach (GameObject hull in hulls) {
 			SliceCounter.SetSliceCount(hull, sliceCount);
 			hull.tag = "SliceTarget";
-			DEBUG_Velocity.LimitVelocity(hull, limitVelocity, targetPos);;
+			hull.layer = LayerMask.NameToLayer("Hulls");
+			hull.transform.position -= _workaroundShift;
 		}
-
 		if (addRigidbodies) {
 			pushHulls(hulls, quadrilateral.normal, pushForceMagnitude, pushInitialInSeconds);
 		}
@@ -70,8 +66,8 @@ public class SliceKnife : MonoBehaviour {
 			MeshUtils.AddMeshCollider(objects[1]);
 		}
 		if (addRigidbodies) {
-			AddRigidbody(objects[0], limitVelocity);
-			AddRigidbody(objects[1], limitVelocity);
+			AddRigidbody(objects[0]);
+			AddRigidbody(objects[1]);
 		}
 		if (sliceMaterial) {
 			UpdateMaterial(objects[0].GetComponent<MeshRenderer>(), ^1, sliceMaterial); 
@@ -86,13 +82,12 @@ public class SliceKnife : MonoBehaviour {
 		mr.SetMaterials(mats.ToList());
 	}
 
-	private static void AddRigidbody(GameObject go, float maxLinearVelocity) {
+	private static void AddRigidbody(GameObject go) {
 		Rigidbody rb = go.AddComponent<Rigidbody>();
 		rb.useGravity = true;
 		rb.isKinematic = false;
 		rb.interpolation = RigidbodyInterpolation.Interpolate;
 		rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-		rb.maxLinearVelocity = maxLinearVelocity;
 	}
 
 	private static Vector3 workaroundShift(GameObject original, GameObject[] hull) {
