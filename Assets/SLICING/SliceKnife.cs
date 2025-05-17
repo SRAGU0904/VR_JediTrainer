@@ -10,7 +10,6 @@ public class SliceKnife : MonoBehaviour {
 
 	public static bool addColider = true;
 	public static bool addRigidbodies = true;
-	public static Material sliceMaterial = null;
 	public static float pushForceMagnitude = 0f;
 	public static float pushInitialInSeconds = 0.5f;
 	public static int sliceCountLimit = 4;
@@ -69,16 +68,14 @@ public class SliceKnife : MonoBehaviour {
 			AddRigidbody(objects[0]);
 			AddRigidbody(objects[1]);
 		}
-		if (sliceMaterial) {
-			UpdateMaterial(objects[0].GetComponent<MeshRenderer>(), ^1, sliceMaterial); 
-			UpdateMaterial(objects[1].GetComponent<MeshRenderer>(), ^1, sliceMaterial);
-		}
+		UpdateMaterial(objects[0].GetComponent<MeshRenderer>(), 0, ^1); 
+		UpdateMaterial(objects[1].GetComponent<MeshRenderer>(), 0, ^1);
 		return objects;
 	}
 
-	private static void UpdateMaterial(MeshRenderer mr, Index i, Material mat) {
+	private static void UpdateMaterial(MeshRenderer mr, Index source, Index target) {
 		Material[] mats = mr.materials;
-		mats[i] = mat;
+		mats[target] = mats[source];
 		mr.SetMaterials(mats.ToList());
 	}
 
