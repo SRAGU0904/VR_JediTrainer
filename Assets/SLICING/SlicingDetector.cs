@@ -25,7 +25,7 @@ public class SlicingDetector : MonoBehaviour {
 	}
 
 	private void triggerSlicing(Quadrilateral quad) {
-		quad = quad.Expanded(aoeExpandFactor);
+		quad = quad.ExpandedTop(aoeExpandFactor);
 		// Debug:
 		quad.Render();
 		Plane quadPlane = quad.plane;

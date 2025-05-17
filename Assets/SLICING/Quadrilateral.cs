@@ -46,13 +46,12 @@ public class Quadrilateral {
 		return result;
 	}
 
-	public Quadrilateral Expanded(float multiplier) {
-		Vector3 _center = center;
+	public Quadrilateral ExpandedTop(float multiplier) {
 		return new Quadrilateral(
-			(bottomLeft - _center) * multiplier + _center,
-			(bottomRight - _center) * multiplier + _center,
-			(topRight - _center) * multiplier + _center,
-			(topLeft - _center) * multiplier + _center
+			bottomLeft,
+			bottomRight,
+			(topRight - bottomRight) * multiplier + bottomRight,
+			(topLeft - bottomLeft) * multiplier + bottomLeft
 		);
 	}
 

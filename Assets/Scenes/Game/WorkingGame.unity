@@ -4045,7 +4045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angleTolerance: 13
   distTolerance: 0.7
-  crackObj: {fileID: 860017570}
+  crackObj: {fileID: 860017565}
   crackDir: {x: 0, y: 1, z: 0}
 --- !u!4 &1906878933 stripped
 Transform:
