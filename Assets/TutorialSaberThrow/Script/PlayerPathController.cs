@@ -62,19 +62,22 @@ public class PlayerPathController : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
 
         // If player has arrived at the waypoint
+        
         if (distance < stopDistance)
         {
-            bool isLast = (currentIndex == waypoints.Length - 1);
-            bool cleared = IsEnemyGroupCleared(currentIndex);
+	        transform.position = target.position;  // snap to exact point
 
-            if (!cleared)
-            {
-                StartFightPhase(currentIndex);  // Begin combat
-            }
-            else if (!isLast)
-            {
-                ProceedToNextPoint();  // Auto-advance if already cleared
-            }
+	        bool isLast = (currentIndex == waypoints.Length - 1);
+	        bool cleared = IsEnemyGroupCleared(currentIndex);
+
+	        if (!cleared)
+	        {
+		        StartFightPhase(currentIndex);  // Begin combat
+	        }
+	        else if (!isLast)
+	        {
+		        ProceedToNextPoint();  // Auto-advance if already cleared
+	        }
         }
     }
 

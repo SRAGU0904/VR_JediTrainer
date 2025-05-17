@@ -5,7 +5,7 @@ using System.Collections;
 public class UIInstructionTrigger : MonoBehaviour
 {
 	public TextMeshProUGUI textPanel;       // Reference to the text display
-	public string updatedText = "Good job!\n\n Now go forward and try to defeat the enemies in this room! Press ? to skip the enermy";
+	public string updatedText = "Good job!\n\n Now go forward and try to defeat the enemies in this room!";
 
 	private bool alreadyTriggered = false;  // Ensures the trigger only happens once
 
