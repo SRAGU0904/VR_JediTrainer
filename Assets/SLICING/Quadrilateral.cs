@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,15 +53,18 @@ public class Quadrilateral {
 		mf.mesh = CreateMesh();
 		MeshRenderer mr = quadGo.AddComponent<MeshRenderer>();
 		mr.material = new Material(Shader.Find("Sprites/Default"));
-		mr.material.color = new Color(0.5f, 0.5f, 0.5f, 0.1f);
+		mr.material.color = new Color(0.5f, 0.5f, 0.5f, 0.2f);
 		
 	}
 
 	public IEnumerable<GameObject> GetCollisions(string tagFilter) {
 		GameObject quadGo = MeshUtils.CreateGameObject(CreateMesh());
-		MeshCollider mc = MeshUtils.AddMeshCollider(quadGo);
+		MeshCollider mc = MeshUtils.AddMeshCollider(quadGo, false);
 		Collider[] hitColliders = Physics.OverlapBox(center, mc.bounds.extents, Quaternion.identity);
 		quadGo.SetActive(false);
+		if (hitColliders is null) {
+			yield break;
+		}
 		foreach (Collider hitCollider in hitColliders) {
 			if (hitCollider.gameObject.CompareTag(tagFilter) && hitCollider.gameObject != quadGo) {
 				yield return hitCollider.gameObject;

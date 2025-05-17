@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class MeshUtils
 {
-	public static MeshCollider AddMeshCollider(GameObject go) {
+	public static MeshCollider AddMeshCollider(GameObject go, bool convex = true) {
 		MeshCollider mc = go.AddComponent<MeshCollider>();
-		mc.convex = true;
+		mc.convex = convex;
 		return mc;
 	}
 

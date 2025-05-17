@@ -11,17 +11,10 @@ public class SlicingDetector : MonoBehaviour {
 	public float angVelocityThreshold = 5f;
 	public Transform slicerBeginEffector;
 	public Transform slicerEndEffector;
-	public Material sliceMaterial = null;
-	public float pushForce = 3f;
-	public float pushInitialInSeconds = 0.5f;
 	public float aoeExpandFactor = 3f;
-	public float cooldownTime = 1f;
 	
 	private bool _currentlySlicing = false;
 	private bool _previouslySlicing = false;
-
-	[CanBeNull]
-	private Timer _cooldownTimer = null;
 
 	[CanBeNull] private Tuple<Vector3, Vector3> sliceFirst = null;
 	
@@ -29,30 +22,12 @@ public class SlicingDetector : MonoBehaviour {
 		sliceFirst = new Tuple<Vector3, Vector3>(slicerBeginEffector.position, slicerEndEffector.position);
 	}
 
-	private void SliceWithQuad(Quadrilateral quad) {
+	private void triggerSlicing(Quadrilateral quad) {
 		quad = quad.Expanded(aoeExpandFactor);
 		// Debug:
-		quad.Render();
+		// quad.Render();
 		foreach (GameObject objectToSlice in quad.GetCollisions("SliceTarget")) {
-			GameObject[]? newHulls = SliceKnife.SliceWithCorners(objectToSlice, quad, true, true, true, sliceMaterial);
-			if (newHulls is not null) {
-				Debug.Log($"Sliced! {objectToSlice.name}");
-				float signum = 1;
-				Pushable pushable = objectToSlice.GetComponent<Pushable>();
-				;
-				if (pushable is null) {
-					Debug.LogWarning($"Sliced object {objectToSlice.name} does not have a Pushable component!");
-				}
-
-				foreach (GameObject hull in newHulls) {
-					hull.tag = "SliceTarget";
-					Pushable hullPushable = hull.AddComponent<Pushable>();
-					pushable.CopyTo(hullPushable);
-					hullPushable.Push(signum * pushForce * quad.normal, pushInitialInSeconds);
-					Debug.Log($"Pushed {hull.name} with force {(pushForce * quad.normal).magnitude}");
-					signum *= -1;
-				}
-			}
+			SliceKnife.Slice(objectToSlice, quad);
 		}
 	}
 		
@@ -69,9 +44,8 @@ public class SlicingDetector : MonoBehaviour {
 			sliceLast.Item2,
 			sliceFirst.Item2
 		);
-		SliceWithQuad(quad);
+		triggerSlicing(quad);
 		sliceFirst = null;
-		_cooldownTimer = Timer.CreateInstance(cooldownTime);
 	}
 
 	private bool checkSlicing() {
@@ -89,10 +63,7 @@ public class SlicingDetector : MonoBehaviour {
 	}
 	
 	private void Update() {
-		if (Timer.CheckWithNull(_cooldownTimer)) {
-			checkSlicing();
-		}
-		cooldownTime = Mathf.Max(0, cooldownTime - Time.deltaTime);
+		checkSlicing();
 	}
 
 }

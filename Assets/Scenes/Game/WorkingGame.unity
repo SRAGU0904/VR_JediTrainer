@@ -1590,8 +1590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0164f635750f04b1c93a5209bc2966b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceDecayPerSec: 0.5
-  magnitudeZero: 0.1
 --- !u!1 &772036784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,6 +2349,10 @@ PrefabInstance:
     - target: {fileID: 3882449358973539059, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
       propertyPath: m_Name
       value: SlicingController
+      objectReference: {fileID: 0}
+    - target: {fileID: 6268591299253860109, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
+      propertyPath: aoeExpandFactor
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6268591299253860109, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
       propertyPath: slicerEndEffector
