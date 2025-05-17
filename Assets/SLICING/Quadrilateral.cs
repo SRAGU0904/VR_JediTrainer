@@ -61,16 +61,22 @@ public class Quadrilateral {
 		GameObject quadGo = MeshUtils.CreateGameObject(CreateMesh());
 		MeshCollider mc = MeshUtils.AddMeshCollider(quadGo, false);
 		Collider[] hitColliders = Physics.OverlapBox(center, mc.bounds.extents, Quaternion.identity);
+		HashSet<GameObject> seen = new HashSet<GameObject>();
 		quadGo.SetActive(false);
 		if (hitColliders is null) {
 			yield break;
 		}
 		foreach (Collider hitCollider in hitColliders) {
-			if (hitCollider.gameObject.CompareTag(tagFilter) && hitCollider.gameObject != quadGo) {
-				yield return hitCollider.gameObject;
+			GameObject go = hitCollider.gameObject;
+			if (seen.Contains(go)) {
+				continue;
+			}
+			seen.Add(go);
+			if (go.activeSelf && go.CompareTag(tagFilter) && go.gameObject != quadGo) {
+				yield return go;
 			}
 		}
-		// GameObjectDestroyer.DestroyGameObject(quadGo);
+		GameObjectDestroyer.DestroyGameObject(quadGo);
 	}
 }
 

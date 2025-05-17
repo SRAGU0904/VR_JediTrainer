@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MeshUtils
@@ -14,4 +15,15 @@ public class MeshUtils
 		mf.mesh = mesh;
 		return result;
 	}
+
+	// public static Vector3 GetCenterOfMass(IEnumerable<Rigidbody> bodies) {
+	// 	Vector3 result = Vector3.zero;
+	// 	float totalMass = 0;
+	// 	foreach (Rigidbody body in bodies) {
+	// 		float mass = body.mass;
+	// 		result += mass * body.centerOfMass;
+	// 		totalMass += mass;
+	// 	}
+	// 	return result / totalMass;
+	// }
 }

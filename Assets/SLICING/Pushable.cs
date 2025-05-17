@@ -11,11 +11,16 @@ public class Pushable : MonoBehaviour {
 
 	public static Pushable pushGameObject(GameObject go, Vector3 force, float initialPush = 0,
 		float forceDecayPerSec = 0.5f, float magnitudeZero = 0.1f, bool destroyOnStop = true) {
+		Rigidbody _rigidbody;
+		if (!go.TryGetComponent(out _rigidbody)) {
+			Debug.LogError("Tried pushing a GameObject without a Rigidbody!");
+			return null;
+		}
 		Pushable pushable = go.GetOrAddComponent<Pushable>();
 		pushable.forceDecayPerSec = forceDecayPerSec;
 		pushable.magnitudeZero = magnitudeZero;
 		pushable.destroyOnStop = destroyOnStop;
-		pushable._rigidbody = go.GetComponent<Rigidbody>();
+		pushable._rigidbody = _rigidbody;
 		pushable.Push(force, initialPush);
 		return pushable;
 	}
