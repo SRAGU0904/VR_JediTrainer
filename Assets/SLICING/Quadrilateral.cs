@@ -5,6 +5,15 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+public class Plane {
+	public Vector3 center { get; }
+	public Vector3 normal { get; }
+	public Plane(Vector3 center, Vector3 normal) {
+		this.center = center;
+		this.normal = normal;
+	}
+}
+
 public class Quadrilateral {
 	private Vector3 bottomLeft { get; }
 	private Vector3 bottomRight { get; }
@@ -20,6 +29,7 @@ public class Quadrilateral {
 	
 	public Vector3 center => (bottomLeft + bottomRight + topRight + topLeft) / 4;
 	public Vector3 normal => Vector3.Cross(topRight - bottomLeft, topLeft - bottomRight).normalized;
+	public Plane plane => new Plane(center, normal);
 
 	public Mesh CreateMesh() {
 		Vector3[] vertices = new Vector3[] { center, bottomLeft, bottomRight, topRight, topLeft };

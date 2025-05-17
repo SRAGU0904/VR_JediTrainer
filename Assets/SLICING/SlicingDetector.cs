@@ -27,10 +27,14 @@ public class SlicingDetector : MonoBehaviour {
 	private void triggerSlicing(Quadrilateral quad) {
 		quad = quad.Expanded(aoeExpandFactor);
 		// Debug:
-		debugCrack.Cracked(quad.center, quad.normal);
-		// Debug:
 		quad.Render();
+		Plane quadPlane = quad.plane;
+
 		foreach (GameObject objectToSlice in quad.GetCollisions("SliceTarget")) {
+			Plane overridenPlane = SliceCrack.SnapCrackedGameObject(objectToSlice, quadPlane);
+			if (overridenPlane is null) {
+				continue;
+			} 
 			SliceKnife.Slice(objectToSlice, quad);
 		}
 	}

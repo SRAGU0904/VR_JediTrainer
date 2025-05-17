@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeshUtils
+public class MeshUtils : MonoBehaviour
 {
 	public static MeshCollider AddMeshCollider(GameObject go, bool convex = true) {
 		MeshCollider mc = go.AddComponent<MeshCollider>();
@@ -15,7 +15,7 @@ public class MeshUtils
 		mf.mesh = mesh;
 		return result;
 	}
-
+	
 	// public static Vector3 GetCenterOfMass(IEnumerable<Rigidbody> bodies) {
 	// 	Vector3 result = Vector3.zero;
 	// 	float totalMass = 0;
