@@ -29,7 +29,6 @@ public class SlicingDetector : MonoBehaviour {
 		// Debug:
 		debugCrack.Cracked(quad.center, quad.normal);
 		// Debug:
-		SliceCrack.createDebugSphere(quad.center, "quad.center");
 		quad.Render();
 		foreach (GameObject objectToSlice in quad.GetCollisions("SliceTarget")) {
 			SliceKnife.Slice(objectToSlice, quad);

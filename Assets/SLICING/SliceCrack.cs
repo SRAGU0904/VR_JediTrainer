@@ -15,16 +15,17 @@ public class SliceCrack : MonoBehaviour {
 		return angleMatch;
 	}
 
-	private bool distanceMatch(Vector3 planeCenter) {
-		Vector3 translatedCenter = transform.InverseTransformPoint(planeCenter);
-		translatedCenter = Vector3.ProjectOnPlane(translatedCenter, crackDir);
-		createDebugSphere(transform.TransformPoint(translatedCenter), "translatedCenter" );
-		bool distMatch = translatedCenter.magnitude < distTolerance;
-		Debug.Log($"translatedCenter.magnitude: {translatedCenter.magnitude}, distMatch: {distMatch}");
+	private bool distanceMatch(Vector3 planeCenter, Vector3 planeNormal) {
+		Vector3 displacement = planeCenter - transform.position;
+		Vector3 displacementProj = Vector3.ProjectOnPlane(displacement, planeNormal);
+		Vector3 displacementOrtho = displacement - displacementProj;
+		float dist = displacementOrtho.magnitude;
+		bool distMatch = dist < distTolerance;
+		Debug.Log($"dist: {dist}, distMatch: {distMatch}");
 		return distMatch;
 	}
 	public bool Cracked(Vector3 planeCenter, Vector3 planeNormal) {
-		return angleMatch(planeNormal) && distanceMatch(planeCenter);
+		return angleMatch(planeNormal) && distanceMatch(planeCenter, planeNormal);
 	}
 
 	public static void createDebugSphere(Vector3 pos, string name) {
@@ -33,4 +34,5 @@ public class SliceCrack : MonoBehaviour {
 		sphere.transform.position = pos;
 		sphere.transform.localScale = Vector3.one * 0.1f;
 	}
+	
 }

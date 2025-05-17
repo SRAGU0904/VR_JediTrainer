@@ -6,11 +6,10 @@ using UnityEditor;
 using UnityEngine;
 
 public class Quadrilateral {
-
-	public Vector3 bottomLeft { get; private set; }
-	public Vector3 bottomRight { get; private set; }
-	public Vector3 topRight { get; private set; }
-	public Vector3 topLeft { get; private set; }
+	private Vector3 bottomLeft { get; }
+	private Vector3 bottomRight { get; }
+	private Vector3 topRight { get; }
+	private Vector3 topLeft { get; }
 	
 	public Quadrilateral(Vector3 bottomLeft, Vector3 bottomRight, Vector3 topRight, Vector3 topLeft) {
 		this.bottomLeft = bottomLeft;
@@ -53,7 +52,7 @@ public class Quadrilateral {
 		mf.mesh = CreateMesh();
 		MeshRenderer mr = quadGo.AddComponent<MeshRenderer>();
 		mr.material = new Material(Shader.Find("Sprites/Default"));
-		mr.material.color = new Color(0.5f, 0.5f, 0.5f, 0.2f);
+		mr.material.color = new Color(0.5f, 0.5f, 0.5f, 0.1f);
 		
 	}
 
