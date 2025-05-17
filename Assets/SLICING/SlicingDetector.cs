@@ -12,9 +12,11 @@ public class SlicingDetector : MonoBehaviour {
 	public Transform slicerBeginEffector;
 	public Transform slicerEndEffector;
 	public float aoeExpandFactor = 3f;
+	public SliceCrack debugCrack;
 	
 	private bool _currentlySlicing = false;
 	private bool _previouslySlicing = false;
+	
 
 	[CanBeNull] private Tuple<Vector3, Vector3> sliceFirst = null;
 	
@@ -25,7 +27,10 @@ public class SlicingDetector : MonoBehaviour {
 	private void triggerSlicing(Quadrilateral quad) {
 		quad = quad.Expanded(aoeExpandFactor);
 		// Debug:
-		// quad.Render();
+		debugCrack.Cracked(quad.center, quad.normal);
+		// Debug:
+		SliceCrack.createDebugSphere(quad.center, "quad.center");
+		quad.Render();
 		foreach (GameObject objectToSlice in quad.GetCollisions("SliceTarget")) {
 			SliceKnife.Slice(objectToSlice, quad);
 		}
