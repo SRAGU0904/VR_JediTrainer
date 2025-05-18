@@ -658,6 +658,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 324842045}
+  - component: {fileID: 324842046}
+  - component: {fileID: 324842048}
+  - component: {fileID: 324842047}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -682,6 +685,56 @@ Transform:
   - {fileID: 330976325}
   m_Father: {fileID: 244093254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &324842046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324842044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bed803911e0d4fd08897eb25ea429b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityAverageFrames: 5
+  angularVelocityAverageFrames: 11
+  estimateOnAwake: 1
+  tracked: {fileID: 772036785}
+  relativeTo: {fileID: 466744549}
+--- !u!114 &324842047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324842044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3948968eba82c4bdbb1f9d612182d92d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angVelocityThreshold: 7
+  slicerBeginEffector: {fileID: 330976325}
+  slicerEndEffector: {fileID: 772036785}
+  aoeExpandFactor: 5
+--- !u!114 &324842048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324842044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a406bc74dfadb4ceb9cc091072987062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addColider: 1
+  addRigidbodies: 1
+  pushForceMagnitude: 1
+  pushInitialInSeconds: 1
+  sliceCountLimit: 4
 --- !u!1 &330976324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,6 +1179,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401286671}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &466744549 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1680501587, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 1504058131}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &501759751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6318091734647345848, guid: 7f02a8f27711854488bac38bfd5ecd96, type: 3}
@@ -2227,94 +2285,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &1093858989
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2227912048845239056, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: tracked
-      value: 
-      objectReference: {fileID: 772036785}
-    - target: {fileID: 2227912048845239056, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: relativeTo
-      value: 
-      objectReference: {fileID: 1374546419}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2680959245048794277, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3882449358973539059, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: m_Name
-      value: SlicingController
-      objectReference: {fileID: 0}
-    - target: {fileID: 6268591299253860109, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: debugCrack
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6268591299253860109, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: aoeExpandFactor
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6268591299253860109, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: slicerEndEffector
-      value: 
-      objectReference: {fileID: 772036785}
-    - target: {fileID: 6268591299253860109, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: slicerBeginEffector
-      value: 
-      objectReference: {fileID: 330976325}
-    - target: {fileID: 6268591299253860109, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      propertyPath: angVelocityThreshold
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3882449358973539059, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1821747648}
-  m_SourcePrefab: {fileID: 100100000, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
 --- !u!1001 &1231787662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2522,11 +2492,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7095913961676293236, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
   m_PrefabInstance: {fileID: 392964003}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1374546419 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1680501587, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-  m_PrefabInstance: {fileID: 1504058131}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1381602718
 GameObject:
@@ -3904,23 +3869,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7095913961676293236, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
   m_PrefabInstance: {fileID: 921475611}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1821747647 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3882449358973539059, guid: d70576e5d539b465390b63240e06f6ca, type: 3}
-  m_PrefabInstance: {fileID: 1093858989}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1821747648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821747647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0b4e79f78503494e9844f3f3c1f1a86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1888205867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,7 +3881,6 @@ GameObject:
   - component: {fileID: 1888205870}
   - component: {fileID: 1888205869}
   - component: {fileID: 1888205868}
-  - component: {fileID: 1888205872}
   m_Layer: 0
   m_Name: Cube
   m_TagString: SliceTarget
@@ -4031,22 +3978,6 @@ Transform:
   - {fileID: 860017570}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1888205872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888205867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebd1d2e058c854647a5de20c990976b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angleTolerance: 13
-  distTolerance: 0.7
-  crackObj: {fileID: 860017565}
-  crackDir: {x: 0, y: 1, z: 0}
 --- !u!4 &1906878933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6318091734647345848, guid: 7f02a8f27711854488bac38bfd5ecd96, type: 3}
@@ -4370,5 +4301,4 @@ SceneRoots:
   - {fileID: 1504058131}
   - {fileID: 1251289671}
   - {fileID: 903428204}
-  - {fileID: 1093858989}
   - {fileID: 1888205871}
