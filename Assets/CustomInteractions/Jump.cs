@@ -58,7 +58,7 @@ public class Jump : MonoBehaviour {
         }
     }
 
-    bool IsCrouching() {
+    public bool IsCrouching() {
         _inputData._HMD.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition, out Vector3 pos);
         return pos.y <= crouchThreshold;
     }
