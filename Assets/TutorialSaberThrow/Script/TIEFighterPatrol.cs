@@ -8,6 +8,7 @@ public class TIEFighterPatrol : MonoBehaviour
 	[Header("Movement Settings")]
 	public float moveSpeed = 3f;      // Movement speed
 	public float rotateSpeed = 3f;    // Rotation speed
+	public bool rotationEnabled = true;
 
 	private int currentIndex = 0;     // Current waypoint index
 	private float patrolHeight;       // Fixed height to maintain
@@ -41,7 +42,7 @@ public class TIEFighterPatrol : MonoBehaviour
 		transform.position = new Vector3(transform.position.x, patrolHeight, transform.position.z);
 
 		// Smoothly rotate toward the direction of movement ---
-		if (moveDir != Vector3.zero)
+		if (rotationEnabled && moveDir != Vector3.zero)
 		{
 			Quaternion lookRot = Quaternion.LookRotation(moveDir);
 			transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, rotateSpeed * Time.deltaTime);
