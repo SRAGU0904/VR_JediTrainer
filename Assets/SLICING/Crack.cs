@@ -7,7 +7,7 @@ namespace Slicing {
 		public float angleTolerance = 10;
 		public float distTolerance = 0.5f;
 		public GameObject crackObj;
-		public Vector3 crackDir = Vector3.up;
+		public Vector3 crackDir = Vector3.right;
 
 		private bool angleMatch(Vector3 planeNormal) {
 			Vector3 translatedNormal = crackObj.transform.InverseTransformDirection(planeNormal);
