@@ -17,6 +17,7 @@ namespace Slicing {
 		public Transform slicerBeginEffector;
 		public Transform slicerEndEffector;
 		public float aoeExpandFactor = 5f;
+		public bool debug = false;
 
 		private bool _currentlySlicing = false;
 		private bool _previouslySlicing = false;
@@ -36,8 +37,10 @@ namespace Slicing {
 
 		private void triggerSlicing(Quadrilateral quad) {
 			quad = quad.ExpandedTop(aoeExpandFactor);
-			// Debug:
-			quad.Render();
+			if (debug)
+			{
+				quad.Render();
+			}
 			Plane quadPlane = quad.plane;
 
 			foreach (GameObject objectToSlice in quad.GetCollisions("SliceTarget")) {
@@ -45,7 +48,6 @@ namespace Slicing {
 				if (overridenPlane is null) {
 					continue;
 				}
-
 				_slicingKnife.Slice(objectToSlice, quad);
 			}
 		}
