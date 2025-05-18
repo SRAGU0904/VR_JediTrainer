@@ -22,7 +22,8 @@ public class TargetingSystem : MonoBehaviour {
 
     void Shoot() {
         Quaternion rotation = Quaternion.LookRotation(ShootDirection(true));
-        Instantiate(laser, firePoint.position, rotation);
+        GameObject projectile = Instantiate(laser, firePoint.position, rotation);
+        Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
         ScheduleNextShot();
     }
 
