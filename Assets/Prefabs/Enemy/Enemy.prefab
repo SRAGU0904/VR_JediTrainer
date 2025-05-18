@@ -49,15 +49,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.16069
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.16069
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.32138
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalPosition.x
@@ -139,8 +139,9 @@ MonoBehaviour:
   firePoint: {fileID: 1633120781302368756}
   target: {fileID: 0}
   minDelay: 1
-  maxDelay: 4
-  maxDistanceAway: 1
+  maxDelay: 2
+  minForwardDistance: 1
+  maxForwardDistance: 2
 --- !u!136 &-8757232615574513862
 CapsuleCollider:
   m_ObjectHideFlags: 0
