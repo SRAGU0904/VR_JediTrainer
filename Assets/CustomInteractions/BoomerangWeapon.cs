@@ -14,7 +14,7 @@ public class BoomerangWeapon : MonoBehaviour
     public InputActionReference throwAction;
 
     [Header("Throw Settings")]
-    public float returnDelay = 1.5f;              // Time after throw before returning
+    public float returnDelay = 0.9f;              // Time after throw before returning
     public float spinTorque = 300f;               // Amount of spin force when flying
     public float minFlyTime = 0.2f;               // Minimum time before allowing return
     public float throwDelay = 0.07f;              // Delay after button press before actual throw
