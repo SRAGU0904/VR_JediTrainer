@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,19 +10,31 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PhysicalCharacterController))]
 public class Jump : MonoBehaviour {
 
+    public static event Action OnJump;
+    public static event Action OnJumpReady;
+    public static event Action OnThresholdSet;
+
     public InputActionReference setCrouchThresholdButton;
-    public float crouchThreshold = 0.25f;
+    public uint hapticChannel = 0;
+    public float hapticAmplitude = 1f;
+    public float hapticDuration = 1f;
+    public float crouchThreshold = -1f;
+    public float jumpThreshold = 0.1f;
     public float maxJumpHeight = 3.0f;
     public float minJumpCharge = 0.25f;
     public float maxJumpCharge = 1f;
 
     private InputData _inputData;
     private PhysicalCharacterController _physicalCharacterController;
-    private float jumpCharge = 0f;
+    public float jumpCharge;
+
+    private bool jumpReadyCalled = false;
 
     void Start() {
         _inputData = GetComponent<InputData>();
         _physicalCharacterController = GetComponent<PhysicalCharacterController>();
+        jumpReadyCalled = false;
+        jumpCharge = 0f;
     }
 
     void OnEnable() {
@@ -37,26 +50,42 @@ public class Jump : MonoBehaviour {
     private void SetCrouchThreshold(InputAction.CallbackContext context) {
         if (context.performed) {
             _inputData._HMD.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition, out Vector3 currentPosition);
-            crouchThreshold = currentPosition.y;            
+            _inputData._leftController.SendHapticImpulse(hapticChannel, hapticAmplitude, hapticDuration);
+            crouchThreshold = currentPosition.y;
+            OnThresholdSet?.Invoke();
         }
     }
 
     void Update() {
         if (_physicalCharacterController.IsGrounded() && IsCrouching()) {
             jumpCharge += Time.deltaTime;
+            if (jumpCharge >= minJumpCharge && !jumpReadyCalled) {
+                OnJumpReady?.Invoke();
+                jumpReadyCalled = true;
+            }
         }
         else {
-            if (jumpCharge > minJumpCharge) {
-                float jumpHeight = maxJumpHeight * jumpCharge / maxJumpCharge;
-                _physicalCharacterController.Jump(jumpHeight);
+            if (headLevel() > crouchThreshold + jumpThreshold) {
+                if (jumpCharge > minJumpCharge) {
+                    float jumpHeight = maxJumpHeight * (jumpCharge - minJumpCharge) / (maxJumpCharge - minJumpCharge);
+                    _physicalCharacterController.Jump(jumpHeight);
+                    OnJump?.Invoke();
+                
+                }
+                jumpCharge = 0f;
+                jumpReadyCalled = false;
             }
-            jumpCharge = 0f;
+
         }
     }
 
-    public bool IsCrouching() {
+    private float headLevel() {
         _inputData._HMD.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition, out Vector3 pos);
-        return pos.y <= crouchThreshold;
+        return pos.y;
+    }
+
+    public bool IsCrouching() {
+        return headLevel() <= crouchThreshold;
     }
 
 }

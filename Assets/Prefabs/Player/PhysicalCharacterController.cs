@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 // https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
 public class PhysicalCharacterController : MonoBehaviour {
+    public static event Action OnLand;
+
     private CharacterController controller;
     public Vector3 playerVelocity;
 
@@ -10,15 +13,22 @@ public class PhysicalCharacterController : MonoBehaviour {
     public float gravityValue = -9.81f;
     private float defaultGravity;
 
+    private bool landed = false;
+
     private void Start() {
         controller = gameObject.GetComponent<CharacterController>();
         defaultGravity = gravityValue;
+        landed = false;
     }
 
     void Update() {
         if (IsGrounded() && playerVelocity.y < 0) {
             playerVelocity.y = 0f;
         }
+        if (IsGrounded() && !landed) {
+            OnLand?.Invoke();
+        }
+        landed = !IsGrounded();
 
         // Apply gravity
         playerVelocity.y += gravityValue * Time.deltaTime;

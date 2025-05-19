@@ -454,15 +454,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump Button",
-                    "type": "Button",
-                    "id": "bae1de16-80b2-4d60-a143-597a726735ab",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Set Crouch Threshold",
                     "type": "Button",
                     "id": "39638101-8bab-48c5-800f-ecba1f2bd743",
@@ -472,13 +463,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Banana",
-                    "type": "Value",
-                    "id": "9af50edc-1406-47b6-a1d7-98b3084cd652",
-                    "expectedControlType": "Quaternion",
+                    "name": "Crouch Threshold Ok",
+                    "type": "Button",
+                    "id": "bae1de16-80b2-4d60-a143-597a726735ab",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -892,33 +883,22 @@
                 {
                     "name": "",
                     "id": "96f04a31-620a-42cd-ab4d-48f05ac67f10",
-                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump Button",
+                    "action": "Crouch Threshold Ok",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "d277c180-695b-4856-b5e7-73b3a8c77ec7",
-                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Set Crouch Threshold",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a0994174-1d73-4659-95ac-14284c2d3f8c",
-                    "path": "<XRController>{LeftHand}/deviceRotation",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Banana",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
