@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour {
 		if (other.CompareTag("Player")) // or check for specific component
 		{
 			var health = other.GetComponent<HealthSystem>();
-			health.TakeDamage(10);
+			// health.TakeDamage(10);
 		}
 
 		Destroy(gameObject); // Destroy the projectile

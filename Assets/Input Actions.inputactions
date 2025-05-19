@@ -3451,7 +3451,7 @@
             "bindings": [
                 {
                     "name": "One Modifier",
-                    "id": "da8dc5bc-a892-4a6b-80e2-45a8d79b131d",
+                    "id": "12d612b8-b0d5-49ce-99a8-08cce02d2d89",
                     "path": "OneModifier",
                     "interactions": "",
                     "processors": "",
@@ -3462,7 +3462,7 @@
                 },
                 {
                     "name": "modifier",
-                    "id": "8efc0be6-9ee5-4ede-a5e4-1ee2e3b441d2",
+                    "id": "b9beff12-39bf-4e88-913b-44c1d77056f9",
                     "path": "<XRController>{LeftHand}/{GripButton}",
                     "interactions": "",
                     "processors": "",
@@ -3473,7 +3473,7 @@
                 },
                 {
                     "name": "binding",
-                    "id": "0b038438-4cfa-4ba6-83a3-a5470cdc0cfd",
+                    "id": "977443d9-de0a-416b-9780-9809683ccdbe",
                     "path": "<XRController>{RightHand}/{GripButton}",
                     "interactions": "",
                     "processors": "",
