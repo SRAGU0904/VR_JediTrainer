@@ -4967,7 +4967,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -9766,6 +9766,7 @@ GameObject:
   - component: {fileID: 6808482571265277693}
   - component: {fileID: 3535628502172844651}
   - component: {fileID: 6571484741626582147}
+  - component: {fileID: 1006310643757989173}
   m_Layer: 9
   m_Name: OrbCrackable
   m_TagString: SliceTarget
@@ -9816,7 +9817,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0
+    scalar: 3
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -14620,7 +14621,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -14643,6 +14644,20 @@ MonoBehaviour:
   swingTargetObj: {fileID: 9047757603269741534}
   swingTargetDir: {x: 1, y: 0, z: 0}
   sliceNormalDir: {x: 0, y: 1, z: 0}
+--- !u!114 &1006310643757989173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5966034751122022504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d70a985263f7247b01ea6a8a53e385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  lifetime: 20
 --- !u!1 &7566997172301413461
 GameObject:
   m_ObjectHideFlags: 0
