@@ -21,12 +21,8 @@ namespace Slicing {
 				return null;
 			}
 
-			Debug.Log("Slicing object " + objectToSlice.name);
-			Debug.Log("Plane center: " + planeCenter);
-			Debug.Log("Plane normal: " + planeNormal);
 			GameObject[] objects = objectToSlice.SliceInstantiate(planeCenter, planeNormal);
 			if (objects == null) {
-				Debug.Log("Slicing unsuccessful");
 				return null;
 			}
 
