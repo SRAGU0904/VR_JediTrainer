@@ -1,30 +1,31 @@
 ﻿using UnityEngine;
 
 public class TargetingSystem : MonoBehaviour {
-    public GameObject laser;
-    public Transform firePoint;
-    public GameObject target;
-    public float minDelay;
-    public float maxDelay;
+	public GameObject laser;
+	public Transform firePoint;
+	public GameObject target;
+	public float minDelay;
+	public float maxDelay;
 	public float maxDistanceAway = 1f;
 
 	void Start() {
-        ScheduleNextShot();
+		ScheduleNextShot();
 	}
 
-    void Update() {
-        transform.rotation = Quaternion.LookRotation(HeadDirection());
-    }
+	void Update() {
+		transform.rotation = Quaternion.LookRotation(HeadDirection());
+	}
 
-    void ScheduleNextShot() {
-        Invoke("Shoot", Random.Range(minDelay, maxDelay));
-    }
+	void ScheduleNextShot() {
+		Invoke("Shoot", Random.Range(minDelay, maxDelay));
+	}
 
-    void Shoot() {
-        Quaternion rotation = Quaternion.LookRotation(ShootDirection(true));
-        Instantiate(laser, firePoint.position, rotation);
-        ScheduleNextShot();
-    }
+	void Shoot() {
+		Quaternion rotation = Quaternion.LookRotation(ShootDirection(true));
+		GameObject projectile = Instantiate(laser, firePoint.position, rotation);
+		Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
+		ScheduleNextShot();
+	}
 
 	Vector3 HeadDirection() {
 		if (target == null) return Vector3.forward;

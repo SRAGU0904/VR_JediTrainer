@@ -14,11 +14,11 @@ public class Projectile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player")) // or check for specific component
-		{
-			var health = other.GetComponent<HealthSystem>();
-			// health.TakeDamage(10);
-		}
+		// if (other.CompareTag("Player")) // or check for specific component
+		// {
+		// 	var health = other.GetComponent<HealthSystem>();
+		// 	health.TakeDamage(10);
+		// }
 
 		Destroy(gameObject); // Destroy the projectile
 	}
