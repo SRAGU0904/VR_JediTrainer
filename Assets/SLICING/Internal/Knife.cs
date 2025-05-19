@@ -68,7 +68,12 @@ namespace Slicing {
 		}
 
 		public ISlicingBehaviour GetBehaviour(GameObject go) {
-			return _defaultBehaviour;
+			ISlicingBehaviour[] instances = go.GetComponents<ISlicingBehaviour>();
+			if (instances.Length > 1) {
+				Debug.LogError($"More than one ISlicingBehaviour component on {go.name}!");
+			}
+			return instances.FirstOrDefault() ?? _defaultBehaviour;
+			
 		}
 	}
 
