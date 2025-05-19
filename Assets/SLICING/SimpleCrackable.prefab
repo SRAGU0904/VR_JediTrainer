@@ -210,5 +210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angleTolerance: 10
   distTolerance: 0.5
-  crackObj: {fileID: 5466076981387949189}
-  crackDir: {x: 1, y: 0, z: 0}
+  swingTargetObj: {fileID: 5466076981387949189}
+  swingTargetDir: {x: 1, y: 0, z: 0}
+  sliceNormalDir: {x: 0, y: 1, z: 0}
