@@ -23,7 +23,7 @@ public class SwapScenes : MonoBehaviour
 		SceneManager.LoadScene(3);
 	}
 
-	public static void GotoSaberCutTutorial() {
-		//SceneManager.LoadScene(1);
+	public static void GotoSaberCutTutorial() { 
+		SceneManager.LoadScene(4);
 	}
 }
