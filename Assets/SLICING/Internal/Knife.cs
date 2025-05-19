@@ -11,10 +11,6 @@ namespace Slicing {
 	[RequireComponent(typeof(DefaultSlicingBehaviour))]
 	class SlicingKnife : MonoBehaviour {
 
-		public bool addColider = true;
-		public bool addRigidbodies = true;
-		public float pushForceMagnitude = 1f;
-		public float pushInitialInSeconds = 1f;
 		public int sliceCountLimit = 4;
 		private DefaultSlicingBehaviour _defaultBehaviour;
 
@@ -30,14 +26,13 @@ namespace Slicing {
 				Destroy(objectToSlice);
 				return null;
 			}
-
-			GameObject[] hulls = GetBehaviour(objectToSlice).CreateHulls(objectToSlice, plane.center, plane.normal);
+			ISlicingBehaviour behaviour = GetBehaviour(objectToSlice);
+			GameObject[] hulls = behaviour.CreateHulls(objectToSlice, plane.center, plane.normal);
 			if (hulls is null) {
 				return null;
 			}
 
 			Vector3 workaroundShift = GetWorkaroundShift(objectToSlice, hulls);
-			Destroy(objectToSlice);
 			foreach (GameObject hull in hulls) {
 				SliceCounter.SetSliceCount(hull, sliceCount);
 				hull.tag = "SliceTarget";
@@ -45,21 +40,12 @@ namespace Slicing {
 				hull.transform.position -= workaroundShift;
 			}
 
-			if (addRigidbodies) {
-				pushHulls(hulls, plane.normal, pushForceMagnitude, pushInitialInSeconds);
-			}
+			behaviour.PushHulls(hulls, plane.normal);
+			Destroy(objectToSlice);
 
 			return hulls;
 		}
 
-		private void pushHulls(GameObject[] hulls, Vector3 planeNormal, float pushForceMagnitude,
-			float pushInitialInSeconds) {
-			float signum = 1f;
-			foreach (GameObject hull in hulls) {
-				Pushable.pushGameObject(hull, signum * pushForceMagnitude * planeNormal, pushInitialInSeconds);
-				signum *= -1;
-			}
-		}
 
 		private static Vector3 GetWorkaroundShift(GameObject original, GameObject[] hull) {
 			// Very simple approximation

@@ -11,6 +11,8 @@ namespace Slicing {
 		
 		public bool addColider = true;
 		public bool addRigidbodies = true;
+		public float pushForceMagnitude = 1f;
+		public float pushInitialInSeconds = 1f;
 		
 		[CanBeNull]
 		public GameObject[] CreateHulls(GameObject objectToSlice, Vector3 planeCenter, Vector3 planeNormal) {
@@ -57,6 +59,16 @@ namespace Slicing {
 			rb.interpolation = RigidbodyInterpolation.Interpolate;
 			rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 		}
-	}
+		
+		public void PushHulls(GameObject[] hulls, Vector3 planeNormal) {
+			float signum = 1f;
+			foreach (GameObject hull in hulls) {
+				Pushable.pushGameObject(hull, signum * pushForceMagnitude * planeNormal, pushInitialInSeconds);
+				signum *= -1;
+			}
+		}
 
+	}
+	
+	
 }
