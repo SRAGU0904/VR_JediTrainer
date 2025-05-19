@@ -1,0 +1,11 @@
+Model Information:
+* title:	Jar Jar Binks
+* source:	https://sketchfab.com/3d-models/jar-jar-binks-85aef3e496d44e9b95c7386035c0ef10
+* author:	Mind Mulch for The Masses (https://sketchfab.com/mindmulchforthemasses)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Jar Jar Binks" (https://sketchfab.com/3d-models/jar-jar-binks-85aef3e496d44e9b95c7386035c0ef10) by Mind Mulch for The Masses (https://sketchfab.com/mindmulchforthemasses) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

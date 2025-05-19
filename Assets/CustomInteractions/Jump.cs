@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PhysicalCharacterController))]
 public class Jump : MonoBehaviour {
 
-    public InputActionReference jumpButton;
     public InputActionReference setCrouchThresholdButton;
     public float crouchThreshold = 0.25f;
     public float maxJumpHeight = 3.0f;
@@ -26,13 +25,11 @@ public class Jump : MonoBehaviour {
     }
 
     void OnEnable() {
-        jumpButton.action.Enable();
         setCrouchThresholdButton.action.Enable();
         setCrouchThresholdButton.action.performed += SetCrouchThreshold;
     }
 
     void OnDisable() {
-        jumpButton.action.Disable();
         setCrouchThresholdButton.action.Disable();
         setCrouchThresholdButton.action.performed -= SetCrouchThreshold;
     }
@@ -44,9 +41,8 @@ public class Jump : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
     void Update() {
-        if (_physicalCharacterController.IsGrounded() && IsCrouching() && jumpButton.action.IsPressed()) {
+        if (_physicalCharacterController.IsGrounded() && IsCrouching()) {
             jumpCharge += Time.deltaTime;
         }
         else {

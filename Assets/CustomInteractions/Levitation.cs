@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PhysicalCharacterController))]
 public class Levitation : MonoBehaviour {
-    public InputActionReference levitationButton;
+
     public InputActionReference leftControllerRotationAction;
     public InputActionReference rightControllerRotationAction;
     public float levitationGravity = -2f;
@@ -20,19 +20,17 @@ public class Levitation : MonoBehaviour {
     }
 
     void OnEnable() {
-        levitationButton.action.Enable();
         leftControllerRotationAction.action.Enable();
         rightControllerRotationAction.action.Enable();
     }
 
     void OnDisable() {
-        levitationButton.action.Disable();
         leftControllerRotationAction.action.Disable();
         rightControllerRotationAction.action.Disable();
     }
 
     void Update() {
-        bool levitationRequested = LevitationRequested();
+        bool levitationRequested = IsLevitationRequested();
         if (!levitationEnabled && levitationRequested) {
             _physicalCharacterController.gravityValue = levitationGravity;
             _physicalCharacterController.playerVelocity = new Vector3(_physicalCharacterController.playerVelocity.x, 0, _physicalCharacterController.playerVelocity.z);
@@ -44,7 +42,7 @@ public class Levitation : MonoBehaviour {
         }
     }
 
-    private bool LevitationRequested() {
+    private bool IsLevitationRequested() {
         float leftRotation = leftControllerRotationAction.action.ReadValue<Quaternion>().eulerAngles.x;
         float rightRotation = leftControllerRotationAction.action.ReadValue<Quaternion>().eulerAngles.x;
 
@@ -53,6 +51,6 @@ public class Levitation : MonoBehaviour {
 
         bool goodRotations = goodLeftRotation && goodRightRotation;
 
-        return goodRotations && !_physicalCharacterController.IsGrounded() && _physicalCharacterController.playerVelocity.y < 0 && levitationButton.action.IsPressed();
+        return goodRotations && !_physicalCharacterController.IsGrounded() && _physicalCharacterController.playerVelocity.y < 0;
     }
 }

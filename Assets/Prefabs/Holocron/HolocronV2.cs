@@ -15,17 +15,22 @@ public class HolocronV2 : MonoBehaviour {
 
     public TextMeshProUGUI targetText;
 
-	public void Start() {
+    void Start() {
         if (setToInitialMessageOnStart) DisplayMessage(currentMessage);
 	}
 
-	public void DisplayMessage(int messageId) {
+    void Update() {
+        if (currentMessage < 0 || currentMessage >= messages.Count) return;
+        var message = string.Join("\n", messages[currentMessage]) + "\n";
+        if (currentMessage > 0) message += "←";
+        if (currentMessage < messages.Count - 1) message += "→";
+        targetText.text = message;
+ 	}
+
+    // Use this method to display a message present in the messages list
+    public void DisplayMessage(int messageId) {
         if (messageId < 0 || messageId >= messages.Count) return;
         currentMessage = messageId;
-        var message = string.Join("\n", messages[messageId]) + "\n";
-        if (messageId > 0) message += "←";
-        if (messageId < messages.Count - 1) message += "→";
-        targetText.text = message;
     }
 
     public void OnMoveRight() {
