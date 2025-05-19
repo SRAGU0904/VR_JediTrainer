@@ -67,7 +67,7 @@ public class ForceTutorialManager : MonoBehaviour
 				_currentState = TutorialState.Win;
 			}
 		}else if (_currentState == TutorialState.Win) {
-			//TELEPORT THE PLAYER BACK TO THE MAIN HUB
+			SwapScenes.GotoMainHub();
 		}
 	}
 

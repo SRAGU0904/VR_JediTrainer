@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Game/MainHub.unity
+    guid: 267c74d3e7ae2404194359fb80431078
+  - enabled: 1
     path: Assets/Scenes/Tutorials/JumpTutorial.unity
     guid: 82cb381c8a236cc419f6887de0ac0781
+  - enabled: 1
+    path: Assets/Scenes/Tutorials/Force_tutorial.unity
+    guid: 08b932298b2c54d41a7fb03e51a2897d
+  - enabled: 1
+    path: Assets/Scenes/Tutorials/SaberThrow_tutorial.unity
+    guid: bfdf4a1f5c1935b4599003b05b20d4e3
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 38dd9615519802a4dbd2945b82e38556, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
