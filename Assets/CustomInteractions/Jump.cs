@@ -29,12 +29,14 @@ public class Jump : MonoBehaviour {
     public float jumpCharge;
 
     private bool jumpReadyCalled = false;
+    private bool maxFeedbackSent = false;
 
     void Start() {
         _inputData = GetComponent<InputData>();
         _physicalCharacterController = GetComponent<PhysicalCharacterController>();
         jumpReadyCalled = false;
         jumpCharge = 0f;
+        maxFeedbackSent = false;
     }
 
     void OnEnable() {
@@ -63,17 +65,24 @@ public class Jump : MonoBehaviour {
                 OnJumpReady?.Invoke();
                 jumpReadyCalled = true;
             }
+            if (jumpCharge >= maxJumpCharge && !maxFeedbackSent) {
+                _inputData._leftController.SendHapticImpulse(hapticChannel, hapticAmplitude, hapticDuration);
+                _inputData._rightController.SendHapticImpulse(hapticChannel, hapticAmplitude, hapticDuration);
+                maxFeedbackSent = true;
+            }
         }
         else {
             if (headLevel() > crouchThreshold + jumpThreshold) {
                 if (jumpCharge > minJumpCharge) {
-                    float jumpHeight = maxJumpHeight * (jumpCharge - minJumpCharge) / (maxJumpCharge - minJumpCharge);
+                    jumpCharge = Math.Min(jumpCharge, maxJumpCharge);
+                    float jumpHeight = maxJumpHeight * (jumpCharge - minJumpCharge) / maxJumpCharge;
                     _physicalCharacterController.Jump(jumpHeight);
                     OnJump?.Invoke();
-                
+
                 }
                 jumpCharge = 0f;
                 jumpReadyCalled = false;
+                maxFeedbackSent = false;
             }
 
         }
