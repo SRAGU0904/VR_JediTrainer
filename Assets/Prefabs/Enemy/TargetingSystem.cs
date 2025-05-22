@@ -53,4 +53,5 @@ public class TargetingSystem : MonoBehaviour {
 
 		return (predictedPosition - firePoint.position).normalized;
 	}
+	
 }

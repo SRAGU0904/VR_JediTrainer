@@ -12,18 +12,18 @@ public class SwapScenes : MonoBehaviour
 		SceneManager.LoadScene(0);
 	}
 	public static void GotoForceTutorial() {
-		SceneManager.LoadScene(2);
+		SceneManager.LoadScene("Force_tutorial");
 	}
 
 	public static void GotoJumpTutorial() {
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene("JumpTutorial");
 	}
 
 	public static void GotoSaberThrowTutorial() {
-		SceneManager.LoadScene(3);
+		SceneManager.LoadScene("SaberThrow_tutorial");
 	}
 
 	public static void GotoSaberCutTutorial() { 
-		SceneManager.LoadScene(4);
+		SceneManager.LoadScene("SlicingTutorial");
 	}
 }
