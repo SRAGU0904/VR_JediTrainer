@@ -7,35 +7,32 @@ using System;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(InputData))]
-public class BoomerangWeapon : MonoBehaviour
+public class SaberThrow : MonoBehaviour
 {
     [Header("References")]
-    public Transform rightControllerDirection;   // The direction reference from the right controller
+    public Transform rightControllerDirection;
     public InputActionReference throwAction;
 
     [Header("Throw Settings")]
-    public float returnDelay = 0.9f;              // Time after throw before returning
-    public float spinTorque = 300f;               // Amount of spin force when flying
-    public float minFlyTime = 0.2f;               // Minimum time before allowing return
-    public float throwDelay = 0.07f;              // Delay after button press before actual throw
-    public float returnAcceleration = 10f;        // Acceleration while returning
+    public float returnDelay = 0.9f;
+    public float spinTorque = 300f;
+    public float minFlyTime = 0.2f;
+    public float returnAcceleration = 10f;
 
-    private float initialThrowSpeed = 0f;         // Speed at moment of throw
-    private float returnSpeed = 0f;               // Speed during return
-    private float returnTimer = 0f;               // Timer for return movement
-    private float flightTimer = 0f;               // Timer for flying out
+    private float initialThrowSpeed = 0f;
+    private float returnSpeed = 0f;
+    private float returnTimer = 0f;
+    private float flightTimer = 0f;
 
-    private Vector3 flyDirection;                 // Current flying direction
-    private Vector3 spinAxis;                     // Axis used for spinning the boomerang
+    private Vector3 flyDirection;
+    private Vector3 spinAxis;
 
-    private bool isHeld = false;                  // Whether boomerang is currently held
-    private bool canSetHeld = false;               // Whether we allow re-grabbing logic
-    private bool isFlyingOut = false;             // Whether boomerang is flying out
-    private bool isReturning = false;             // Whether boomerang is returning
-    private bool canReturn = false;               // Whether returning is allowed
-    private bool isThrowScheduled = false;        // Whether a delayed throw has been scheduled
+    private bool isHeld = false;
+    private bool canSetHeld = false;
+    private bool isFlyingOut = false;
+    private bool isReturning = false;
+    private bool canReturn = false;
 
-    // References
     private Rigidbody rb;
     private Collider col;
     private XRGrabInteractable interactable;
@@ -44,7 +41,6 @@ public class BoomerangWeapon : MonoBehaviour
 
     public float requiredThrowForce;
 
-    // === Initialization ===
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -55,7 +51,6 @@ public class BoomerangWeapon : MonoBehaviour
         interactable.selectEntered.AddListener(OnGrab);
         interactable.selectExited.AddListener(OnRelease);
 
-        // Check if starting already held
         if (interactable.isSelected)
         {
             isHeld = true;
@@ -67,35 +62,31 @@ public class BoomerangWeapon : MonoBehaviour
         }
     }
 
-    // === Per-frame Update ===
     void Update()
     {
         HandleMovement();
     }
 
-    void OnEnable() {
+    void OnEnable()
+    {
         throwAction.action.Enable();
         throwAction.action.performed += HandleInput;
     }
 
-    void OnDisable() {
+    void OnDisable()
+    {
         throwAction.action.Disable();
         throwAction.action.performed -= HandleInput;
     }
 
-    // === Handle input ===
-    private void HandleInput(InputAction.CallbackContext context) {
-        if (context.performed) {
-            if (isHeld && !isThrowScheduled)
-            {
-                isThrowScheduled = true;
-                Invoke(nameof(DelayedThrow), throwDelay);
-                Debug.Log("[BOOMERANG DEBUG] Throw scheduled after delay");
-            }
+    private void HandleInput(InputAction.CallbackContext context)
+    {
+        if (context.performed && isHeld)
+        {
+            Throw();
         }
     }
 
-    // === Handle flying out or returning movement ===
     private void HandleMovement()
     {
         if (isFlyingOut)
@@ -108,12 +99,9 @@ public class BoomerangWeapon : MonoBehaviour
         if (isReturning)
         {
             returnTimer += Time.deltaTime;
-
-            // Move toward the hand
             Vector3 dir = (rightControllerDirection.position - transform.position).normalized;
             float distance = Vector3.Distance(transform.position, rightControllerDirection.position);
             float boostedSpeed = returnSpeed + returnAcceleration * returnTimer;
-
             rb.linearVelocity = dir * boostedSpeed;
 
             if (distance < 0.5f)
@@ -122,23 +110,10 @@ public class BoomerangWeapon : MonoBehaviour
 
         if (isFlyingOut || isReturning)
         {
-            // Constant rotation around spin axis
             rb.AddTorque(spinAxis * spinTorque * Time.deltaTime, ForceMode.Force);
         }
     }
 
-    // === Called after scheduled throw delay ===
-    private void DelayedThrow()
-    {
-        isThrowScheduled = false;
-
-        if (isHeld)
-            Throw();
-        else
-            Debug.Log("[BOOMERANG DEBUG] Throw canceled: not held anymore");
-    }
-
-    // === Handle grab (select entered) ===
     private void OnGrab(SelectEnterEventArgs args)
     {
         interactor = args.interactorObject;
@@ -153,7 +128,6 @@ public class BoomerangWeapon : MonoBehaviour
         Debug.Log("[BOOMERANG DEBUG] Grabbed boomerang!");
     }
 
-    // === Handle release (select exited) ===
     private void OnRelease(SelectExitEventArgs args)
     {
         if (!canSetHeld)
@@ -166,87 +140,71 @@ public class BoomerangWeapon : MonoBehaviour
         Debug.Log("[BOOMERANG DEBUG] Released");
     }
 
-    // === Core throwing logic ===
     private void Throw()
     {
-	    // Get controller velocity and angular velocity from input
         _inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceVelocity, out Vector3 localVelocity);
         _inputData._rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceAngularVelocity, out Vector3 angularVel);
-        // if (Math.Abs(angularVel.x) < requiredThrowForce) return; 
 
-        // Read controller velocity
-        // Convert local velocity to world space
         Vector3 controllerVelocity = rightControllerDirection.TransformDirection(localVelocity);
         float controllerSpeed = controllerVelocity.magnitude;
         float speedThreshold = 0.3f;
-        
-        // Only allow throwing if speed is above threshold
+
         if (controllerSpeed <= speedThreshold)
         {
-	        Debug.Log("[BOOMERANG DEBUG] Throw cancelled: speed too low");
-	        return;
+            Debug.Log("[BOOMERANG DEBUG] Throw cancelled: speed too low");
+            return;
         }
-        
-        // Force deselection of the interactable
+
         if (interactor != null && interactable.interactionManager != null)
         {
-	        interactable.interactionManager.SelectExit(interactor, interactable);
+            interactable.interactionManager.SelectExit(interactor, interactable);
         }
+
         isHeld = false;
         canSetHeld = true;
         transform.SetParent(null);
-        
-        // Prepare rigidbody for physics-based movement
+
         rb.isKinematic = false;
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.None;
         rb.angularDamping = 0f;
 
-        // Use the rightControllerDirection forward as the flying direction
         flyDirection = rightControllerDirection.forward;
+        Vector3 motionDir = localVelocity.normalized;
         float speedMultiplier = 8f;
-        initialThrowSpeed = Mathf.Pow(controllerSpeed, 1.2f) * speedMultiplier;
+        initialThrowSpeed = controllerSpeed * speedMultiplier;
         rb.linearVelocity = flyDirection * initialThrowSpeed;
-        
+
         if (controllerSpeed > speedThreshold)
         {
-	        Vector3 motionDir = controllerVelocity.normalized;
+            spinAxis = Vector3.Cross(flyDirection, motionDir).normalized;
 
-	        // The axis of rotation should be perpendicular to both the flight direction and the swinging direction.
-	        spinAxis = Vector3.Cross(flyDirection, motionDir).normalized;
+            if (spinAxis == Vector3.zero || float.IsNaN(spinAxis.x))
+            {
+                spinAxis = rightControllerDirection.up;
+            }
 
-	        if (spinAxis == Vector3.zero || float.IsNaN(spinAxis.x))
-	        {
-		        // When the cross product approaches zero, use the upward direction of the controller as the rotation axis.
-		        spinAxis = rightControllerDirection.up;
-	        }
+            rb.inertiaTensor = Vector3.one;
+            rb.inertiaTensorRotation = Quaternion.identity;
+            rb.angularVelocity = spinAxis * 50f;
 
-	        rb.inertiaTensor = Vector3.one;
-	        rb.inertiaTensorRotation = Quaternion.identity;
-	        rb.angularVelocity = spinAxis * 50f;
-
-	        //Debug
-	        Debug.Log($"[DEBUG] flyDir: {flyDirection}, motionDir: {motionDir}, spinAxis: {spinAxis}");
+            Debug.Log($"[DEBUG] flyDir: {flyDirection}, motionDir: {motionDir}, spinAxis: {spinAxis}");
         }
 
-        // Initialize flight state
         flightTimer = 0f;
         isFlyingOut = true;
         col.enabled = true;
 
-        // Set up return timing
         canReturn = false;
         Invoke(nameof(EnableReturn), minFlyTime);
         Invoke(nameof(StartReturn), returnDelay);
     }
 
-    // === Enable returning after minFlyTime ===
     private void EnableReturn()
     {
         canReturn = true;
     }
 
-    // === Start moving back to the hand ===
     private void StartReturn()
     {
         isReturning = true;
@@ -256,7 +214,6 @@ public class BoomerangWeapon : MonoBehaviour
         returnTimer = 0f;
     }
 
-    // === Finalize return and attach to hand ===
     private void CompleteReturn()
     {
         rb.linearVelocity = Vector3.zero;
@@ -280,7 +237,6 @@ public class BoomerangWeapon : MonoBehaviour
         Debug.Log("[BOOMERANG DEBUG] Returned to hand");
     }
 
-    // === Attach boomerang to controller ===
     private void AttachToController()
     {
         transform.SetParent(rightControllerDirection);
@@ -288,7 +244,8 @@ public class BoomerangWeapon : MonoBehaviour
         transform.localRotation = Quaternion.identity;
     }
 
-    public bool IsHeld() {
+    public bool IsHeld()
+    {
         return isHeld;
     }
 }

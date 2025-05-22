@@ -6384,7 +6384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6282210580330209643, guid: df3024af28386f648a55bd0094abb29e, type: 3}
       propertyPath: m_text
-      value: Goto  Lightsaber Throw Tutorial (Not working)
+      value: Goto  Lightsaber Throw Tutorial (WORKING)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
