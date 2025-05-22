@@ -169,7 +169,7 @@ public class SaberThrow : MonoBehaviour
         rb.constraints = RigidbodyConstraints.None;
         rb.angularDamping = 0f;
 
-        flyDirection = rightControllerDirection.forward;
+        flyDirection = transform.forward;
         Vector3 motionDir = localVelocity.normalized;
         float speedMultiplier = 8f;
         initialThrowSpeed = controllerSpeed * speedMultiplier;
