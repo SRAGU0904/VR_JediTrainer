@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ToggleButton : MonoBehaviour {
@@ -16,7 +16,7 @@ public class ToggleButton : MonoBehaviour {
     }
 
     private void OnButtonPressed(InputAction.CallbackContext context) {
-        if (context.performed && GetComponentInParent<BoomerangWeapon>().IsHeld()) {
+        if (context.performed && GetComponentInParent<SaberThrow>().IsHeld()) {
             GetComponent<Animator>().SetTrigger("Toggle");
         }
     }
