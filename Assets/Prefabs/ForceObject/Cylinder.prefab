@@ -152,3 +152,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionCollider: {fileID: 198000012942003240, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
+  explosionSound: {fileID: 8300000, guid: 0a98cd2389aa0ce448e91ada3238a458, type: 3}

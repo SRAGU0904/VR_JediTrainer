@@ -8,7 +8,11 @@ public class TargetingSystem : MonoBehaviour {
 	public float maxDelay;
 	public float maxDistanceAway = 1f;
 
+	public AudioClip shootSound;
+	private AudioSource audioSource;
+
 	void Start() {
+		audioSource = GetComponent<AudioSource>();
 		ScheduleNextShot();
 	}
 
@@ -24,6 +28,10 @@ public class TargetingSystem : MonoBehaviour {
 		Quaternion rotation = Quaternion.LookRotation(ShootDirection(true));
 		GameObject projectile = Instantiate(laser, firePoint.position, rotation);
 		Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
+
+		if (audioSource != null && shootSound != null)
+			audioSource.PlayOneShot(shootSound);
+
 		ScheduleNextShot();
 	}
 

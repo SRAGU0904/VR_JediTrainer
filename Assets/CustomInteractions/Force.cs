@@ -2,10 +2,10 @@
 using UnityEngine.XR;
 using System.Collections.Generic;
 using System.Collections;
-using static ForceHandler;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(InputData))]
+[RequireComponent(typeof(AudioSource))]
 public class ForceHandler : MonoBehaviour{
     private InputData _inputData;
 
@@ -16,6 +16,12 @@ public class ForceHandler : MonoBehaviour{
 		RightHand,
 	}
 	public HandType handType;
+
+	public AudioClip forcePushSound;
+	public AudioClip forcePullSound;
+	private AudioSource forceAudioSource;
+	private float lastSoundTime = 0f;
+	private float audioCooldown = 0.5f;
 
 	private float coneAngle = 15f;
     private float pushForceMultiplier = 6f;
@@ -39,6 +45,7 @@ public class ForceHandler : MonoBehaviour{
 
     private void Start(){
         _inputData = GetComponent<InputData>();
+		forceAudioSource = GetComponent<AudioSource>();
 		Vector3 localPos;
 		if (handType == HandType.LeftHand){
 			_inputData._leftController.TryGetFeatureValue(CommonUsages.devicePosition, out localPos);
@@ -70,6 +77,10 @@ public class ForceHandler : MonoBehaviour{
         if (isTriggerPressed){
             if(Mathf.Abs(forceAmount) >= minForcePower){
 				SendHacticFeedback();
+				if (forceAmount >= minForcePower)
+					TryToPlaySoundNoOverlap(forcePushSound);
+				else
+					TryToPlaySoundNoOverlap(forcePullSound);
 				UseTheForce();
             }
             ForcePullHeldObjects();
@@ -81,7 +92,7 @@ public class ForceHandler : MonoBehaviour{
     void UseTheForce(){
         Collider[] hits = Physics.OverlapSphere(globalHandPosition, maxForceDistance, interactableLayer);
 
-        foreach (Collider hit in hits){
+		foreach (Collider hit in hits){
 
             Vector3 dirToObj = (hit.transform.position - globalHandPosition).normalized;
             if (Vector3.Angle(handForward, dirToObj) < coneAngle){
@@ -93,15 +104,15 @@ public class ForceHandler : MonoBehaviour{
         }
     }
     void ForcePush(Collider hit){
-        Rigidbody rb = hit.attachedRigidbody;
+		Rigidbody rb = hit.attachedRigidbody;
         if(rb != null && rb.useGravity){
             Vector3 forceDir = (hit.transform.position - globalHandPosition).normalized;
             rb.AddForce(forceDir * handVelocity.magnitude * pushForceMultiplier, ForceMode.Impulse);
         }
     }
 
-    void AddObjectToHeldObjects(Collider hit) { 
-        Rigidbody rb = hit.attachedRigidbody;
+    void AddObjectToHeldObjects(Collider hit){
+		Rigidbody rb = hit.attachedRigidbody;
         if (rb != null && !heldObjects.Contains(rb)){
             rb.useGravity = false;
             heldObjects.Add(rb);
@@ -183,6 +194,12 @@ public class ForceHandler : MonoBehaviour{
 		yield return new WaitForSeconds(delay);
 		if (rb != null) {
 			rb.useGravity = true;
+		}
+	}
+	void TryToPlaySoundNoOverlap(AudioClip clip){
+		if (Time.time - lastSoundTime >= audioCooldown) {
+			forceAudioSource.PlayOneShot(clip, 0.9f);
+			lastSoundTime = Time.time;
 		}
 	}
 }
