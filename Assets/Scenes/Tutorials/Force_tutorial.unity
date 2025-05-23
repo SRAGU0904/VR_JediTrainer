@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -509,6 +513,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -578,6 +586,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -853,7 +865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[1]'
-      value: 'Ennemies bots will be shooting at you, you can  protect yourself by
+      value: 'Enemies bots will be shooting at you, you can  protect yourself by
         holding containers in front of you. '
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
@@ -910,6 +922,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -1389,6 +1405,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -1760,6 +1780,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -1936,7 +1960,7 @@ PrefabInstance:
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[1]'
       value: To start you can use the force push ability by holding down the back
-        trigger button of your left controller and pushing your hand forward.
+        trigger button of your controller and pushing your hand forward.
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[2]'
@@ -2368,6 +2392,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -2639,6 +2667,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -2708,6 +2740,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -2777,6 +2813,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -2915,6 +2955,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -3285,6 +3329,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -3461,8 +3509,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[0]'
-      value: 'Great job! Now try to use force pull. Hold down the back trigger button
-        and pull your hand towards you.   '
+      value: Great job! Now try to use force pull. Hold down the back trigger button
+        and pull your hand towards you.
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[1]'
@@ -3471,8 +3519,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[2]'
-      value: 'While holding objects you can move the joystick to move the objects
-        closer or further to you. '
+      value: 'While holding objects, you can move the joystick to move the objects
+        closer or further from you. '
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[3]'
@@ -3533,6 +3581,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -3607,6 +3659,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
@@ -3686,6 +3742,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8757232615574513862, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1536175786780746316, guid: ec6afb75094ad86469acf582a68d4c46, type: 3}
       propertyPath: target
       value: 
