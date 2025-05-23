@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.XR;
 using System.Collections.Generic;
-using System;
+using System.Collections;
+using static ForceHandler;
+using UnityEditor.Experimental.GraphView;
 
 [RequireComponent(typeof(InputData))]
 public class ForceHandler : MonoBehaviour{
@@ -9,8 +11,13 @@ public class ForceHandler : MonoBehaviour{
 
     public Transform xrOrigin;
     public LayerMask interactableLayer;
+	public enum HandType {
+		LeftHand,
+		RightHand,
+	}
+	public HandType handType;
 
-    private float coneAngle = 15f;
+	private float coneAngle = 15f;
     private float pushForceMultiplier = 6f;
     private float pullSpeed = 5f;
     private float maxForceDistance = 15f;
@@ -32,14 +39,26 @@ public class ForceHandler : MonoBehaviour{
 
     private void Start(){
         _inputData = GetComponent<InputData>();
-        _inputData._leftController.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 localPos);
+		Vector3 localPos;
+		if (handType == HandType.LeftHand){
+			_inputData._leftController.TryGetFeatureValue(CommonUsages.devicePosition, out localPos);
+		}else{
+			_inputData._rightController.TryGetFeatureValue(CommonUsages.devicePosition, out localPos);
+		}
+		
         previouslocalHandPosition = xrOrigin.TransformPoint(localPos);
     }
 
     void Update(){
-        _inputData._leftController.TryGetFeatureValue(CommonUsages.triggerButton, out isTriggerPressed);
-        _inputData._leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out joyStickAxis);
-        _inputData._leftController.TryGetFeatureValue(CommonUsages.devicePosition, out currentlocalHandPosition);
+		if (handType == HandType.LeftHand){
+			_inputData._leftController.TryGetFeatureValue(CommonUsages.triggerButton, out isTriggerPressed);
+			_inputData._leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out joyStickAxis);
+			_inputData._leftController.TryGetFeatureValue(CommonUsages.devicePosition, out currentlocalHandPosition);
+		}else{
+			_inputData._rightController.TryGetFeatureValue(CommonUsages.triggerButton, out isTriggerPressed);
+			_inputData._rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out joyStickAxis);
+			_inputData._rightController.TryGetFeatureValue(CommonUsages.devicePosition, out currentlocalHandPosition);
+		}
 
 		globalHandPosition = xrOrigin.TransformPoint(currentlocalHandPosition);
         handVelocity = (currentlocalHandPosition - previouslocalHandPosition) / Time.deltaTime;
@@ -67,15 +86,15 @@ public class ForceHandler : MonoBehaviour{
             Vector3 dirToObj = (hit.transform.position - globalHandPosition).normalized;
             if (Vector3.Angle(handForward, dirToObj) < coneAngle){
 				if (forceAmount >= minForcePower && heldObjects.Count == 0)
-                   ForcePush(hit);
-                else
-                   AddObjectToHeldObjects(hit);
+					ForcePush(hit);
+				else
+					AddObjectToHeldObjects(hit);
             }
         }
     }
     void ForcePush(Collider hit){
         Rigidbody rb = hit.attachedRigidbody;
-        if(rb != null){
+        if(rb != null && rb.useGravity){
             Vector3 forceDir = (hit.transform.position - globalHandPosition).normalized;
             rb.AddForce(forceDir * handVelocity.magnitude * pushForceMultiplier, ForceMode.Impulse);
         }
@@ -118,19 +137,19 @@ public class ForceHandler : MonoBehaviour{
 
 		for (int i = heldObjects.Count - 1; i >= 0; i--) {
             Rigidbody rb = heldObjects[i];
-            if (rb != null) {
-                Vector2 planeOffset = GetObjectPlaneOffset(i);
-                Vector3 localOffset = handRight * planeOffset.x + handUp * planeOffset.y;
-                Vector3 targetWorldPos = planeOrigin + localOffset;
-                Vector3 toTarget = targetWorldPos - rb.position;
+            if (rb != null){
+				if (forceAmount > minForcePower) {
+					rb.AddForce(handForward * handVelocity.magnitude * pushForceMultiplier, ForceMode.Impulse);
+					heldObjects.RemoveAt(i);
+					StartCoroutine(ReenableGravityAfterDelay(rb, 1.0f));
+				}else{
+					Vector2 planeOffset = GetObjectPlaneOffset(i);
+					Vector3 localOffset = handRight * planeOffset.x + handUp * planeOffset.y;
+					Vector3 targetWorldPos = planeOrigin + localOffset;
+					Vector3 toTarget = targetWorldPos - rb.position;
 
-                rb.linearVelocity = toTarget * pullSpeed;
-
-                if (forceAmount > minForcePower) {
-                    rb.AddForce(handForward * handVelocity.magnitude * pushForceMultiplier, ForceMode.Impulse);
-                    rb.useGravity = true;
-                    heldObjects.RemoveAt(i);
-                }
+					rb.linearVelocity = toTarget * pullSpeed;
+				}
             }
         }
     }
@@ -146,13 +165,24 @@ public class ForceHandler : MonoBehaviour{
     }
 
 	void SendHacticFeedback() {
-		InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+		InputDevice controller;
+		if (handType == HandType.LeftHand)
+			controller = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+		else
+			controller = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
 
-		if (leftController.TryGetHapticCapabilities(out HapticCapabilities capabilities) && capabilities.supportsImpulse) {
+		if (controller.TryGetHapticCapabilities(out HapticCapabilities capabilities) && capabilities.supportsImpulse) {
 			uint channel = 0; 
 			float amplitude = 0.25f; 
-			float duration = 0.1f;  
-			leftController.SendHapticImpulse(channel, amplitude, duration);
+			float duration = 0.1f;
+			controller.SendHapticImpulse(channel, amplitude, duration);
+		}
+	}
+
+	IEnumerator ReenableGravityAfterDelay(Rigidbody rb, float delay){
+		yield return new WaitForSeconds(delay);
+		if (rb != null) {
+			rb.useGravity = true;
 		}
 	}
 }

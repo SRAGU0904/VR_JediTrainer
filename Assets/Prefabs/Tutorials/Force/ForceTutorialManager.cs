@@ -40,8 +40,9 @@ public class ForceTutorialManager : MonoBehaviour
 
     void Update()
     {
-		_inputData._leftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool buttonPressed);
-        if (buttonPressed && spawnTrigger.IsTriggerEmpty) {
+		_inputData._leftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftButtonPressed);
+		_inputData._rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool rightButtonPressed);
+		if ((leftButtonPressed || rightButtonPressed) && spawnTrigger.IsTriggerEmpty) {
 			SpawnForceObjects();
         }
 		UpdateState();

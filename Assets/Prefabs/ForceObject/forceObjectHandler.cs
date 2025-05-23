@@ -14,7 +14,7 @@ public class ForceObjectHandler : MonoBehaviour
 	void OnTriggerEnter(Collider other) {
 		if (other.CompareTag("Laser")){
 			hp -= 1;
-			if(hp < 0)
+			if(hp == 0)
 				explodeForceObject();
 		}else if (other.CompareTag("Enemy")){
 			Destroy(other.gameObject);
