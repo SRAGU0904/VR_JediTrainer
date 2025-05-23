@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.XR;
 using System.Collections.Generic;
+using System;
 
 [RequireComponent(typeof(InputData))]
 public class ForceHandler : MonoBehaviour{
@@ -12,7 +13,7 @@ public class ForceHandler : MonoBehaviour{
     private float coneAngle = 15f;
     private float pushForceMultiplier = 6f;
     private float pullSpeed = 5f;
-    private float maxForceDistance = 10f;
+    private float maxForceDistance = 15f;
     private float minForcePower = 1.5f;
     private float minPlaneDistanceFromHand = 0.75f;
     private float maxPlaneDistanceFromHand = 10f;
@@ -49,7 +50,8 @@ public class ForceHandler : MonoBehaviour{
 
         if (isTriggerPressed){
             if(Mathf.Abs(forceAmount) >= minForcePower){
-                UseTheForce();
+				SendHacticFeedback();
+				UseTheForce();
             }
             ForcePullHeldObjects();
         }else{
@@ -64,10 +66,10 @@ public class ForceHandler : MonoBehaviour{
 
             Vector3 dirToObj = (hit.transform.position - globalHandPosition).normalized;
             if (Vector3.Angle(handForward, dirToObj) < coneAngle){
-               if (forceAmount >= minForcePower && heldObjects.Count == 0)
-                  ForcePush(hit);
-               else
-                  AddObjectToHeldObjects(hit);
+				if (forceAmount >= minForcePower && heldObjects.Count == 0)
+                   ForcePush(hit);
+                else
+                   AddObjectToHeldObjects(hit);
             }
         }
     }
@@ -111,8 +113,10 @@ public class ForceHandler : MonoBehaviour{
         Vector3 handRight = transform.right;
         Vector3 handUp = transform.up;
 
-        for (int i = 0; i < heldObjects.Count; i+=1){
+		if(heldObjects.Count > 0)
+			SendHacticFeedback();
 
+		for (int i = heldObjects.Count - 1; i >= 0; i--) {
             Rigidbody rb = heldObjects[i];
             if (rb != null) {
                 Vector2 planeOffset = GetObjectPlaneOffset(i);
@@ -122,7 +126,7 @@ public class ForceHandler : MonoBehaviour{
 
                 rb.linearVelocity = toTarget * pullSpeed;
 
-                if (forceAmount > minForcePower){
+                if (forceAmount > minForcePower) {
                     rb.AddForce(handForward * handVelocity.magnitude * pushForceMultiplier, ForceMode.Impulse);
                     rb.useGravity = true;
                     heldObjects.RemoveAt(i);
@@ -140,4 +144,15 @@ public class ForceHandler : MonoBehaviour{
         }
         heldObjects.Clear();
     }
+
+	void SendHacticFeedback() {
+		InputDevice leftController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+
+		if (leftController.TryGetHapticCapabilities(out HapticCapabilities capabilities) && capabilities.supportsImpulse) {
+			uint channel = 0; 
+			float amplitude = 0.25f; 
+			float duration = 0.1f;  
+			leftController.SendHapticImpulse(channel, amplitude, duration);
+		}
+	}
 }

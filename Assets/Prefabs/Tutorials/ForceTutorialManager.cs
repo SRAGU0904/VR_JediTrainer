@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.XR;
 using System.Collections.Generic;
-using TMPro;
 
 [RequireComponent(typeof(InputData))]
 public class ForceTutorialManager : MonoBehaviour
@@ -14,16 +13,16 @@ public class ForceTutorialManager : MonoBehaviour
 	public OnTriggerWatcher tryPullTrigger;
 	public OnTriggerWatcher tryPullPushComboTrigger;
 
-	public TMP_Text tryForcePushText;
-	public TMP_Text tryForcePullText;
-	public TMP_Text tryForcePullPushComboText;
-	public TMP_Text tryDefeatingAllEnnemiesText;
+	public GameObject tryForcePushHolo;
+	public GameObject tryForcePullHolo;
+	public GameObject tryForcePullPushComboHolo;
+	public GameObject tryDefeatingAllEnnemiesHolo;
 
-	public GameObject Ennemy1;
-	public GameObject Ennemy2;
+	public List<GameObject> enemies;
 
 	private InputData _inputData;
 	private TutorialState _currentState;
+	private int _numberOfWaves = 0;
 
 	public enum TutorialState {
 		TryForcePush,
@@ -63,7 +62,18 @@ public class ForceTutorialManager : MonoBehaviour
 				_currentState = TutorialState.TryDefeatingEnnemies;
 			}
 		}else if (_currentState == TutorialState.TryDefeatingEnnemies) {
-			if (Ennemy1 == null && Ennemy2 == null) {
+			int nextIndex = _numberOfWaves <= 3 ? (1 << _numberOfWaves) : (_numberOfWaves - 2)*8;
+			bool currentWaveDefeated = true;
+			for (int i = 0; i < nextIndex && i < enemies.Count; i++) {
+				if (enemies[i] != null) {
+					currentWaveDefeated = false;
+					break;
+				}
+			}
+			if (currentWaveDefeated) {
+				_numberOfWaves += 1;
+			}
+			if (enemies.TrueForAll(enemy => enemy == null)) {
 				_currentState = TutorialState.Win;
 			}
 		}else if (_currentState == TutorialState.Win) {
@@ -75,8 +85,7 @@ public class ForceTutorialManager : MonoBehaviour
         if (prefabToSpawn == null || spawnPoint == null)
             return;
 
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++){
             Vector3 offset = Random.insideUnitSphere * spawnRadius;
             offset.y = 0;
             Instantiate(prefabToSpawn, spawnPoint.position + offset, spawnPoint.rotation);
@@ -84,11 +93,16 @@ public class ForceTutorialManager : MonoBehaviour
     }
 
 	private void UpdateUI() {
-		if (tryForcePushText != null) tryForcePushText.gameObject.SetActive(_currentState == TutorialState.TryForcePush);
-		if (tryForcePullText != null) tryForcePullText.gameObject.SetActive(_currentState == TutorialState.TryForcePull);
-		if (tryForcePullPushComboText != null) tryForcePullPushComboText.gameObject.SetActive(_currentState == TutorialState.TryForcePullPushCombo);
-		if (tryDefeatingAllEnnemiesText != null) tryDefeatingAllEnnemiesText.gameObject.SetActive(_currentState == TutorialState.TryDefeatingEnnemies);
-		if (Ennemy1 != null) Ennemy1.gameObject.SetActive(_currentState == TutorialState.TryDefeatingEnnemies);
-		if (Ennemy2 != null) Ennemy2.gameObject.SetActive(_currentState == TutorialState.TryDefeatingEnnemies);
+		if (tryForcePushHolo != null) tryForcePushHolo.SetActive(_currentState == TutorialState.TryForcePush);
+		if (tryForcePullHolo != null) tryForcePullHolo.SetActive(_currentState == TutorialState.TryForcePull);
+		if (tryForcePullPushComboHolo != null) tryForcePullPushComboHolo.SetActive(_currentState == TutorialState.TryForcePullPushCombo);
+		if (tryDefeatingAllEnnemiesHolo != null) tryDefeatingAllEnnemiesHolo.SetActive(_currentState == TutorialState.TryDefeatingEnnemies);
+		int nextIndex = _numberOfWaves <= 3 ? (1 << _numberOfWaves) : (_numberOfWaves - 2) * 8;
+		for (int i = 0; i < enemies.Count; i++) {
+			GameObject enemy = enemies[i];
+			if (enemy != null) {
+				enemy.SetActive(_currentState == TutorialState.TryDefeatingEnnemies && i < nextIndex);
+			}
+		}
 	}
 }

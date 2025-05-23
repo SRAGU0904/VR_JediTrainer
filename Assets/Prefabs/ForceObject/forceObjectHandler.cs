@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
-public class forceObjectHandler : MonoBehaviour
+public class ForceObjectHandler : MonoBehaviour
 {
+	public ParticleSystem explosionCollider;
 	private int hp;
 	void Start() {
 		hp = 2;
@@ -14,10 +15,17 @@ public class forceObjectHandler : MonoBehaviour
 		if (other.CompareTag("Laser")){
 			hp -= 1;
 			if(hp < 0)
-				Destroy(gameObject);
+				explodeForceObject();
 		}else if (other.CompareTag("Enemy")){
 			Destroy(other.gameObject);
-			Destroy(gameObject);
+			explodeForceObject();
 		}
+	}
+
+	void explodeForceObject() {
+		ParticleSystem effect = Instantiate(explosionCollider, transform.position, Quaternion.identity);
+		effect.Play();
+		Destroy(effect.gameObject, 2f);
+		Destroy(gameObject);
 	}
 }
