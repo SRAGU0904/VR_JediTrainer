@@ -2,8 +2,8 @@
 using UnityEngine.SceneManagement;
 public class SwapScenes : MonoBehaviour
 {
-	 public static void GotoMainHub() {
-		SceneManager.LoadScene(5);
+	public static void GotoMainHub() {
+		SceneManager.LoadScene(0);
 	}
 	public static void GotoForce() {
 		SceneManager.LoadScene(2);
