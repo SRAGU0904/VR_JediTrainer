@@ -32,6 +32,7 @@ namespace Slicing {
 		[CanBeNull] private Tuple<Vector3, Vector3> sliceFirst = null;
 
 		private void onSlicingStart() {
+			Debug.Log("Slicing started!");
 			sliceFirst = new Tuple<Vector3, Vector3>(slicerBeginEffector.position, slicerEndEffector.position);
 		}
 
