@@ -3303,7 +3303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[0]'
-      value: \nIn this tutorial, you will learn how to jump like a real jedi
+      value: \nWelcome Padawan, here you will learn how to jump like a real jedi
       objectReference: {fileID: 0}
     - target: {fileID: 6363259743699855028, guid: f2e95debd8a88f3438644c1be41194bf, type: 3}
       propertyPath: 'messages.Array.data[1]'
