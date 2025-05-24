@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Trainers/SaberThrow_tutorial.unity
     guid: bfdf4a1f5c1935b4599003b05b20d4e3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Trainers/SlicingTutorial.unity
     guid: b7ba2bf25e02041559a299c843a6d78c
   m_configObjects:
