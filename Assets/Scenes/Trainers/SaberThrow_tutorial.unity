@@ -1001,8 +1001,8 @@ MonoBehaviour:
   - 'Nice job! Now there are two enemies in the room. Throw your saber to take them
     down. '
   - This is the final task. Throw your lightsaber to eliminate all enemies and TIE
-    fighters in the room.
-  - "Well done, Jedi. You have completed your training. You\u2019ll be returned in
+    fighter in the room.
+  - "Well done, Jedi. You have completed this training. You\u2019ll be returned in
     10 seconds."
   currentMessage: 0
   setToInitialMessageOnStart: 1
