@@ -26,6 +26,10 @@ namespace Slicing {
 				return null;
 			}
 
+			foreach (GameObject hull in objects) {
+				hull.transform.SetParent(objectToSlice.transform.parent, false);;
+			}
+
 			if (addColider) {
 				objects[0].layer = LayerMask.NameToLayer("Hulls");
 				objects[1].layer = LayerMask.NameToLayer("Hulls");
@@ -39,11 +43,11 @@ namespace Slicing {
 				AddRigidbody(objects[1]);
 			}
 			
-			Vector3 workaroundShift = GetWorkaroundShift(objectToSlice, objects);
-			objects[0].transform.position -= workaroundShift;
-			objects[1].transform.position -= workaroundShift;
-			WorkaroundFreezePhysics.Freeze(objects[0]);
-			WorkaroundFreezePhysics.Freeze(objects[1]);
+			// Vector3 workaroundShift = GetWorkaroundShift(objectToSlice, objects);
+			// objects[0].transform.position -= workaroundShift;
+			// objects[1].transform.position -= workaroundShift;
+			// WorkaroundFreezePhysics.Freeze(objects[0]);
+			// WorkaroundFreezePhysics.Freeze(objects[1]);
 			
 			UpdateMaterial(objects[0].GetComponent<MeshRenderer>(), 0, ^1);
 			UpdateMaterial(objects[1].GetComponent<MeshRenderer>(), 0, ^1);
