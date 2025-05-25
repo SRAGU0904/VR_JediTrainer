@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using EzySlice;
 using JetBrains.Annotations;
-using Slicing;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 namespace Slicing {
