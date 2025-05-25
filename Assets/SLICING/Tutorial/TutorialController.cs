@@ -13,14 +13,19 @@ public class TutorialController : MonoBehaviour {
 	public float defaultDelay = 3f;
 
 	private static TutorialController _instance;
-	
-	private void OnValidate() {
+
+	private static void FindInstances() {
 		TutorialController[] instances = FindObjectsByType<TutorialController>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 		Assert.AreEqual(instances.Length, 1, "There should be only one TutorialController in the scene!");
 		_instance = instances[0];
 	}
+	
+	private void OnValidate() {
+		FindInstances();
+	}
 
 	private void Start() {
+		FindInstances();
 		ExecuteStageChange(_currentStageIndex);
 		StartCoroutine(Worker(defaultDelay));
 	}
