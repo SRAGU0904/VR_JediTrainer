@@ -25,6 +25,7 @@ namespace Slicing {
 			if (objects == null) {
 				return null;
 			}
+			objectToSlice.tag = "Untagged";
 
 			foreach (GameObject hull in objects) {
 				hull.transform.SetParent(objectToSlice.transform.parent, false);;
