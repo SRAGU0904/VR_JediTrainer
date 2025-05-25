@@ -18,12 +18,18 @@ namespace Slicing {
 		public Transform slicerEndEffector;
 		public float aoeExpandFactor = 5f;
 		public bool debug = false;
+		public GameObject sliceAnimPrefab;
+		public float sliceDistance = 2;
 
 		private bool _currentlySlicing = false;
 		private bool _previouslySlicing = false;
 		private VelocityTracker _velocityTracker;
 		private SlicingKnife _slicingKnife;
 
+		private void RenderSlash(Plane plane) {
+			Quaternion rotation = Quaternion.Euler(180,0,0) * Quaternion.LookRotation(Vector3.forward, plane.normal);
+			Instantiate(sliceAnimPrefab, transform.position, rotation, transform);
+		}
 		private void Start() {
 			_velocityTracker = GetComponent<VelocityTracker>();
 			_slicingKnife = GetComponent<SlicingKnife>();
@@ -49,6 +55,7 @@ namespace Slicing {
 				if (overridenPlane is null) {
 					continue;
 				}
+				RenderSlash(overridenPlane);
 				_slicingKnife.Slice(objectToSlice, overridenPlane);
 			}
 		}

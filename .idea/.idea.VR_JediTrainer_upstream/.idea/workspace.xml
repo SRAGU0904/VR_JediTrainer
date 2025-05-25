@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a61581d1-ef54-477f-878e-4633508d6982" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_JediTrainer_upstream/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_JediTrainer_upstream/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a61581d1-ef54-477f-878e-4633508d6982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,10 +89,10 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1037">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="29281">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1037" />
+      <option name="pid" value="29281" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
         <list>
@@ -115,7 +113,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748136088965</updated>
-      <workItem from="1748136093286" duration="28622000" />
+      <workItem from="1748136093286" duration="30735000" />
     </task>
     <servers />
   </component>
@@ -147,6 +145,19 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Slicing/Internal/Detector.cs</url>
+          <line>57</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Slicing/Internal/Detector.cs" containingFunctionPresentation="Method 'triggerSlicing'">
+            <startOffsets>
+              <option value="1755" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1783" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
