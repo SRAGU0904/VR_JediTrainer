@@ -18,14 +18,14 @@
 - Assets/Prefabs/Lightsaber/ToggleButton.cs
 
 ## Adapted scripts and assets:
-- Assets/Prefabs/Lightsaber/
+- Assets/Prefabs/Lightsaber/Kylo Saber Blue.prefab
 
 
 ## Unmodified scripts and assets:
 - CustomInteractions/InputData.cs
 - Assets/ExternalAssets/interatable_holocron/
 - Assets/ExternalAssets/podium/
-- Assets/Prefabs/Tutorials/SaberThrow/TieFighter/
+- Assets/Prefabs/Tutorials/SaberThrow/TieFighter.fbx
 
 # Relevant scripts and assets for each custom feature:
 ## Force Pull Push:
