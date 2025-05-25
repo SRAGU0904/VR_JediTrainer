@@ -3,13 +3,13 @@
 # Labelling each asset in the project:
 
 ## Produced scripts and assets: 
-- CustomInteractions/Force.cs
+- Assets/CustomInteractions/Force.cs
 - Assets/Prefabs/ForceObject/ForceObjectHandler.cs
 - Assets/Prefabs/Interactable_holocron/HolocronSpawner.cs
 - Assets/Prefabs/Interactable_holocron/HolocronTeleportInfo.cs
 - Assets/Prefabs/Interactable_holocron/SwapScenes.cs
 - Assets/Prefabs/Interactable_holocron/TeleportOnSocket.cs
-- Assets/Prefabs/Tutorials/Force/ForceTurtorialManager.cs
+- Assets/Prefabs/Tutorials/Force/ForceTutorialManager.cs
 - Assets/Prefabs/Tutorials/Force/OnTriggerWatcher.cs
 - Assets/Prefabs/Tutorials/SaberThrow/Script/EnemyManager.cs
 - Assets/Prefabs/Tutorials/SaberThrow/Script/HolocronV3.cs
