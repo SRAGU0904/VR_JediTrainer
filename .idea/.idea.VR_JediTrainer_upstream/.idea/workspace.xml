@@ -18,14 +18,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4a91f199aff8e0e187cfc4b284b295c84c1a6afbec11c6f1d4115fe816212/System.Runtime.CompilerServices.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Slicing/DEBUG.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Slicing/Debug1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Slicing/Internal/AttachToPlayer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Internal/Behaviours/BallTutorialBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Internal/Bouncy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Internal/WorkaroundFreezePhysics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Tutorial/ProjectileFastForward.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Tutorial/Tut3/Tut3Behaviour.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Slicing/VIdeoAssign.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@22ebcc83720a/Runtime/TMP/TMP_Text.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -113,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748136088965</updated>
-      <workItem from="1748136093286" duration="30735000" />
+      <workItem from="1748136093286" duration="32434000" />
     </task>
     <servers />
   </component>
@@ -147,16 +145,29 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Slicing/Internal/Detector.cs</url>
-          <line>57</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Slicing/Internal/Detector.cs" containingFunctionPresentation="Method 'triggerSlicing'">
+          <line>85</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Slicing/Internal/Detector.cs" containingFunctionPresentation="Method 'checkSlicing'">
             <startOffsets>
-              <option value="1755" />
+              <option value="2571" />
             </startOffsets>
             <endOffsets>
-              <option value="1783" />
+              <option value="2588" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="22" />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Slicing/Internal/Detector.cs</url>
+          <line>83</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Slicing/Internal/Detector.cs" containingFunctionPresentation="Method 'checkSlicing'">
+            <startOffsets>
+              <option value="2453" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2515" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
