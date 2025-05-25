@@ -27,32 +27,27 @@ namespace Slicing {
 				return null;
 			}
 			ISlicingBehaviour behaviour = GetBehaviour(objectToSlice);
+			behaviour.OnSlicingStarted();
 			GameObject[] hulls = behaviour.CreateHulls(objectToSlice, plane.center, plane.normal);
 			if (hulls is null) {
 				return null;
 			}
 
-			Vector3 workaroundShift = GetWorkaroundShift(objectToSlice, hulls);
 			foreach (GameObject hull in hulls) {
 				SliceCounter.SetSliceCount(hull, sliceCount);
 				hull.tag = "SliceTarget";
 				hull.layer = LayerMask.NameToLayer("Hulls");
-				hull.transform.position -= workaroundShift;
 			}
 
 			behaviour.PushHulls(hulls, plane.normal);
+			Debug.Log($"Triggering SlicingFinished on {behaviour.GetType().Name}...");
+			behaviour.OnSlicingFinished();
 			Destroy(objectToSlice);
 
 			return hulls;
 		}
 
-
-		private static Vector3 GetWorkaroundShift(GameObject original, GameObject[] hull) {
-			// Very simple approximation
-			Vector3 meanHullPos = hull.Select(go => go.transform.position).Aggregate((a, b) => a + b) / hull.Length;
-			return meanHullPos - original.transform.position;
-		}
-
+		
 		public ISlicingBehaviour GetBehaviour(GameObject go) {
 			ISlicingBehaviour[] instances = go.GetComponents<ISlicingBehaviour>();
 			if (instances.Length > 1) {
@@ -71,7 +66,7 @@ namespace Slicing {
 				return;
 			}
 
-			Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Hulls"), LayerMask.NameToLayer("Hulls"));
+			// Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Hulls"), LayerMask.NameToLayer("Hulls"));
 			initialized = true;
 		}
 	}

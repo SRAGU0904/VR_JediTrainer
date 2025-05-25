@@ -11,8 +11,8 @@ namespace Slicing {
 		
 		public bool addColider = true;
 		public bool addRigidbodies = true;
-		public float pushForceMagnitude = 1f;
-		public float pushInitialInSeconds = 1f;
+		public float pushForceMagnitude = 2f;
+		public float pushInitialInSeconds = 3f;
 		
 		[CanBeNull]
 		public GameObject[] CreateHulls(GameObject objectToSlice, Vector3 planeCenter, Vector3 planeNormal) {
@@ -27,6 +27,8 @@ namespace Slicing {
 			}
 
 			if (addColider) {
+				objects[0].layer = LayerMask.NameToLayer("Hulls");
+				objects[1].layer = LayerMask.NameToLayer("Hulls");
 				IgnoreHullCollisions.EnsureIgnored();
 				MeshUtils.AddMeshCollider(objects[0]);
 				MeshUtils.AddMeshCollider(objects[1]);
@@ -36,7 +38,13 @@ namespace Slicing {
 				AddRigidbody(objects[0]);
 				AddRigidbody(objects[1]);
 			}
-
+			
+			Vector3 workaroundShift = GetWorkaroundShift(objectToSlice, objects);
+			objects[0].transform.position -= workaroundShift;
+			objects[1].transform.position -= workaroundShift;
+			WorkaroundFreezePhysics.Freeze(objects[0]);
+			WorkaroundFreezePhysics.Freeze(objects[1]);
+			
 			UpdateMaterial(objects[0].GetComponent<MeshRenderer>(), 0, ^1);
 			UpdateMaterial(objects[1].GetComponent<MeshRenderer>(), 0, ^1);
 			return objects;
@@ -63,7 +71,14 @@ namespace Slicing {
 				signum *= -1;
 			}
 		}
+		
+		private static Vector3 GetWorkaroundShift(GameObject original, GameObject[] hull) {
+			// Very simple approximation
+			Vector3 meanHullPos = hull.Select(go => go.transform.position).Aggregate((a, b) => a + b) / hull.Length;
+			return meanHullPos - original.transform.position;
+		}
 
+		
 	}
 	
 	

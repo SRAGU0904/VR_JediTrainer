@@ -38,6 +38,10 @@ namespace Slicing {
 				_rigidbody = GetComponent<Rigidbody>();
 			}
 
+			if (_rigidbody.isKinematic) {
+				return;
+			}
+
 			_rigidbody.linearVelocity += pushForce * Time.deltaTime;
 
 			pushForce *= Mathf.Pow(forceDecayPerSec, Time.deltaTime);
