@@ -1753,8 +1753,12 @@ MonoBehaviour:
   numToComplete: 3
   myStage: 2
   text: {fileID: 5541412809575682946}
-  completedText: Congrats! You have completed the tutorial. Teleporting back to the
-    hub.
+  completedText: 'Congrats!
+
+    You have completed the tutorial.
+
+    Teleporting
+    back to the hub.'
 --- !u!1 &1232006438
 GameObject:
   m_ObjectHideFlags: 0

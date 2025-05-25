@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a61581d1-ef54-477f-878e-4633508d6982" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_JediTrainer_upstream/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_JediTrainer_upstream/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a61581d1-ef54-477f-878e-4633508d6982" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +21,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Internal/Behaviours/BallTutorialBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Internal/Bouncy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Internal/WorkaroundFreezePhysics.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Slicing/TESTTEXT.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Tutorial/ProjectileFastForward.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Tutorial/Tut3/Tut3Behaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@22ebcc83720a/Runtime/TMP/TMP_Text.cs" root0="SKIP_HIGHLIGHTING" />
@@ -111,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748136088965</updated>
-      <workItem from="1748136093286" duration="20083000" />
+      <workItem from="1748136093286" duration="20577000" />
     </task>
     <servers />
   </component>
@@ -143,19 +142,6 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Slicing/Tutorial/TutorialController.cs</url>
-          <line>28</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Slicing/Tutorial/TutorialController.cs" containingFunctionPresentation="Method 'ExecuteStageChange'">
-            <startOffsets>
-              <option value="877" />
-            </startOffsets>
-            <endOffsets>
-              <option value="902" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Slicing/Internal/Knife.cs</url>
           <line>51</line>
