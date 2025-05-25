@@ -28,12 +28,27 @@
 - Assets/Prefabs/JediHologram/SpinObject.cs
 - Assets/Prefabs/Tutorials/Jump/JumpTutorial.cs
 - Assets/Prefabs/Tutorials/Jump/TriggerAreaDetector.cs
+- Assets/Slicing/Internal/Counter.cs
+- Assets/Slicing/Internal/Utils.cs
+- Assets/Slicing/Internal/Behaviours/BallTutorialBehaviour.cs
+- Assets/Slicing/Internal/Behaviours/TutorialBehaviour.cs
+- Assets/Slicing/Tutorial/Tut1/Tut1.mp4
+- Assets/Slicing/Tutorial/Tut2Wrong/Tut2Wrong.mp4
+- Assets/Slicing/Tutorial/Tut2Correct/Tut2Correct.mp4
+- Assets/Slicing/Tutorial/Tut3/Tut3Counter.cs
+- Assets/Slicing/Tutorial/Tut3/Tut3Behaviour.cs
+- Assets/Slicing/Tutorial/ProjectileFastForward.cs
+- Assets/Slicing/Tutorial/TutorialController.cs
+- Assets/Slicing/Internal/AttachToPlayer.cs
+
 
 ## Adapted scripts and assets:
 - Assets/Prefabs/Lightsaber/Kylo Saber Blue.prefab
 - Assets/ExternalAssets/hologram/
 - Assets/ExternalAssets/jedi-holocron
 - Assets/Prefabs/Player/PhysicalCharacterController.cs
+- Assets/Slicing/Dependencies/VelocityTracker.cs
+- Assets/ExternalAssets/Orbs
 
 ## Unmodified scripts and assets:
 - Assets/CustomInteractions/InputData.cs
@@ -46,6 +61,8 @@
 - Assets/ExternalAssets/Star_Wars__Home_One_Briefing_Room/
 - Assets/ExternalAssets/Star_Wars_Rogue_One_Door_Panel/
 - Assets/ExternalAssets/StarWars_Empire_Crate_Cube_Big_[Free_download]/
+- Assets/ExternalAssets/Slash Effects FREE
+- Assets/ExternalAssets/EzySlice
 
 # Relevant scripts and assets for each custom feature:
 ## Force Pull Push:
@@ -57,3 +74,11 @@
 ## Lightsaber Throw:
 - Assets/CustomInteractions/SaberThrow.cs
 ## Lightsaber Cutting:
+- Assets/Slicing/Internal/Detector.cs
+- Assets/Slicing/Internal/Knife.cs
+- Assets/Slicing/Internal/IBehaviour.cs
+- Assets/Slicing/Internal/Behaviours/DefaultBehaviour.cs
+- Assets/Slicing/Internal/Behaviours/BallBehaviour.cs
+- Assets/Slicing/Internal/WorkaroundFreezePhysics.cs
+- Assets/Slicing/Internal/Pushable.cs
+- Assets/Slicing/Crack.cs
