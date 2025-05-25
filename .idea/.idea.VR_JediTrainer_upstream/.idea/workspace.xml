@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a61581d1-ef54-477f-878e-4633508d6982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_JediTrainer_upstream/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_JediTrainer_upstream/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Projectile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Trainers/SlicingTutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Trainers/SlicingTutorial.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +26,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Internal/WorkaroundFreezePhysics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Tutorial/ProjectileFastForward.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Slicing/Tutorial/Tut3/Tut3Behaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@22ebcc83720a/Runtime/TMP/TMP_Text.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -112,7 +112,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748136088965</updated>
-      <workItem from="1748136093286" duration="17529000" />
+      <workItem from="1748136093286" duration="19577000" />
     </task>
     <servers />
   </component>

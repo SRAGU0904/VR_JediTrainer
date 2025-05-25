@@ -11,7 +11,7 @@ namespace Slicing {
 
 		[CanBeNull]
 		public new GameObject[] CreateHulls(GameObject objectToSlice, Vector3 planeCenter, Vector3 planeNormal) {
-			Destroy(this);
+			Destroy(objectToSlice);
 			return null;
 		}
 	}

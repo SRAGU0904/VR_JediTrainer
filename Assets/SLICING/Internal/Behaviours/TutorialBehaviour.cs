@@ -8,7 +8,6 @@ using UnityEngine.Assertions;
 
 namespace Slicing {
 	public class TutorialBehaviour : DefaultSlicingBehaviour, ISlicingBehaviour {
-		public float NextStageDelay = 3f;
 		public int myStage = -1;
 
 		private void OnValidate() {
@@ -17,7 +16,7 @@ namespace Slicing {
 
 		public void OnSlicingFinished() {
 			Debug.Log("Triggered TutorialBehaviour!");
-			TutorialController.StageFinished(myStage, NextStageDelay);
+			TutorialController.StageFinished(myStage);
 		}
 	}
 }

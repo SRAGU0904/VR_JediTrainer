@@ -8,11 +8,11 @@ using UnityEngine.Assertions;
 
 public class TutorialController : MonoBehaviour {
 	public List<GameObject> Stages;
-	public int CurrentStageIndex = 0;
+	private int _currentStageIndex = 0;
+	[CanBeNull] private int? _newStageIndex = null;
 	public float defaultDelay = 3f;
 
 	private static TutorialController _instance;
-	[CanBeNull] private int? _newStageIndex = null;
 	
 	private void OnValidate() {
 		TutorialController[] instances = FindObjectsByType<TutorialController>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
@@ -21,60 +21,72 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	private void Start() {
-		Stages[CurrentStageIndex].SetActive(true);
+		ExecuteStageChange(_currentStageIndex);
+		StartCoroutine(Worker(defaultDelay));
+	}
+
+	private bool ExecuteStageChange(int new_) {
+		if (new_ >= Stages.Count) {
+			// This object should get destroyed and Worker coroutine interrupted,
+			// but just in case exit cleanly on our own.
+			SwapScenes.GotoMainHub();
+			return true;
+		}
+
 		for (int i = 0; i < Stages.Count; i++) {
-			if (i != CurrentStageIndex) {
+			if (i != new_) {
 				Stages[i].SetActive(false);
 			}
 		}
+		_currentStageIndex = new_;
+		_newStageIndex = null;
+		Stages[new_].SetActive(true);
+		return false;
 	}
 
-	private void _StageFinished(int stageIndex, float delay) {
-		lock (_instance) {
-			if (stageIndex < CurrentStageIndex) {
-				return;
+	private IEnumerator Worker(float delay) {
+		while (true) {
+			yield return new WaitForFixedUpdate();
+			// Freeze the values so that no external change can break things
+			int currentStageIndex;
+			int newStageIndex;
+			lock (_instance) {
+				currentStageIndex = _currentStageIndex;
+				newStageIndex = _newStageIndex.GetValueOrDefault(currentStageIndex);
 			}
-			if (_newStageIndex != null) {
-				Debug.LogError("Already changing stage!");
-				return;
+			if (_currentStageIndex == newStageIndex) {
+				continue;
 			}
-			_newStageIndex = stageIndex + 1;
-			StartCoroutine(_ChangeStageAfterDelay(delay));
+			yield return new WaitForSeconds(delay);
+			lock (_instance) {
+				if (ExecuteStageChange(newStageIndex)) {
+					yield break;
+				}
+			}
 		}
+		
 	}
 	
-	private IEnumerator _ChangeStageAfterDelay(float delay = 0f) {
-		yield return new WaitForSeconds(delay);
-		if (_newStageIndex >= Stages.Count) {
-			Debug.Log("Tutorial completed! Going back to the Hub.");
-			CurrentStageIndex = (int)_newStageIndex;
-			_newStageIndex = null;
-			SwapScenes.GotoMainHub();
-			yield break;
-		}
+	public static void StageFinished(int stageIndex) {
 		lock (_instance) {
-			Stages[CurrentStageIndex].SetActive(false);
-			Assert.IsTrue(_newStageIndex != null, "Changing stage has been aborted!?");
-			Stages[(int)_newStageIndex].SetActive(true);
-			CurrentStageIndex = (int)_newStageIndex;
-			_newStageIndex = null;
-		}
-	}
-	
-	public static void StageFinished(int stageIndex, float? delay = null) {
-		_instance._StageFinished(stageIndex, delay.GetValueOrDefault(_instance.defaultDelay));
-	}
-
-	[CanBeNull]
-	public static GameObject GetMyStage(GameObject caller) {
-		while (caller != null) {
-			if (_instance.Stages.Contains(caller)) {
-				return caller;
+			if (stageIndex < _instance._currentStageIndex) {
+				Debug.LogWarning("Tutorial stage already finished!");
+				return;
 			}
-			caller = caller.transform.parent.gameObject;
+			_instance._newStageIndex = stageIndex + 1;
 		}
-
-		return caller;
 	}
+
+	// [CanBeNull]
+	// public static GameObject GetMyStage(GameObject caller) {
+	// 	while (caller != null) {
+	// 		if (_instance.Stages.Contains(caller)) {
+	// 			return caller;
+	// 		}
+	// 		caller = caller.transform.parent.gameObject;
+	// 	}
+	//
+	// 	return caller;
+	// }
 }
 

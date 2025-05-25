@@ -4,7 +4,6 @@ using UnityEngine.Assertions;
 
 public class BallTutorialBehaviour : MonoBehaviour, ISlicingBehaviour
 {
-	public float NextStageDelay = 3f;
 	public int myStage = -1;
 
 	void OnValidate() {
@@ -12,7 +11,7 @@ public class BallTutorialBehaviour : MonoBehaviour, ISlicingBehaviour
 	}
 	
 	public void OnSlicingFinished() {
-		TutorialController.StageFinished(myStage, NextStageDelay);
+		TutorialController.StageFinished(myStage);
 	}
 
     public GameObject[] CreateHulls(GameObject objectToSlice, Vector3 planeCenter, Vector3 planeNormal) {
