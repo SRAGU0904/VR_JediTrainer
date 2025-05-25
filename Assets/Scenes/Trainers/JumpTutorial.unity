@@ -3380,7 +3380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftControllerRotationAction: {fileID: 8248158260566104461, guid: 6809bde59cb62b447a36a83556c511d7, type: 3}
-  rightControllerRotationAction: {fileID: 8248158260566104461, guid: 6809bde59cb62b447a36a83556c511d7, type: 3}
+  rightControllerRotationAction: {fileID: 5101698808175986029, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   levitationGravity: -2
   requiredControllerAngle: 80
   requiredControllerAngleThreshold: 15

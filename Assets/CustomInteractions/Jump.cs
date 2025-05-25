@@ -2,10 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// https://www.youtube.com/watch?v=GRSOrkmasMM
-// https://www.youtube.com/watch?v=Mfim9MlgYWY
-// https://www.youtube.com/watch?v=Xf2eDfLxcB8
-
 [RequireComponent(typeof(InputData))]
 [RequireComponent(typeof(PhysicalCharacterController))]
 public class Jump : MonoBehaviour {

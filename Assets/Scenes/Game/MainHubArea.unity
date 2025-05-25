@@ -822,7 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialMessages:
   - To see the next message, point at this circle, hold down your trigger button
-    and drag it to the left.
+    and swipe to the left.
   - Great job, now to read the previous message again you can do that again but drag
     your controller to the right.
   holocron: {fileID: 1143635620}
