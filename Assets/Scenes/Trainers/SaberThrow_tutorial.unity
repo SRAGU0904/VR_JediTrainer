@@ -992,16 +992,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 544538814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ecc38eebcd85d14180062c70c906e05, type: 3}
+  m_Script: {fileID: 11500000, guid: dd3eabf9748ef9c4c845d2fba84a9185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   messages:
-  - Swing your right controller first and press A to release your lightsaber. When
-    you're ready, try throwing it at the TIE fighter above
-  - Good job! Now try throwing it at the enermies in the room.
-  - 'Now it''s the final task: eliminate all fighters and enemies in the room!'
-  - Congratulations! You've completed the training. You will return to the main hub
-    in 10 seconds.
+  - Swing your right controller first, then press the A button to release the lightsaber.
+    When you're ready, throw it at the TIE fighter above!
+  - 'Nice job! Now there are two enemies in the room. Throw your saber to take them
+    down. '
+  - This is the final task. Throw your lightsaber to eliminate all enemies and TIE
+    fighters in the room.
+  - "Well done, Jedi. You have completed your training. You\u2019ll be returned in
+    10 seconds."
   currentMessage: 0
   setToInitialMessageOnStart: 1
   targetText: {fileID: 342271400}
