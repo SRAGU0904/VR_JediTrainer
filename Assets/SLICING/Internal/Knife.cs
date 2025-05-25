@@ -4,6 +4,7 @@ using System.Linq;
 using EzySlice;
 using JetBrains.Annotations;
 using Slicing;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 namespace Slicing {
@@ -13,6 +14,7 @@ namespace Slicing {
 
 		public int sliceCountLimit = 4;
 		private DefaultSlicingBehaviour _defaultBehaviour;
+		public float cooldown = 0.5f;
 
 		private void Start() {
 			_defaultBehaviour = GetComponent<DefaultSlicingBehaviour>();
@@ -35,7 +37,7 @@ namespace Slicing {
 
 			foreach (GameObject hull in hulls) {
 				SliceCounter.SetSliceCount(hull, sliceCount);
-				hull.tag = "SliceTarget";
+				UnityUtils.TagAfterDelay(hull, cooldown, "SliceTarget");
 				hull.layer = LayerMask.NameToLayer("Hulls");
 			}
 
