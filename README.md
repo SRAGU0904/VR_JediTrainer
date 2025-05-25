@@ -15,6 +15,7 @@
 - Assets/Prefabs/Tutorials/SaberThrow/Script/HolocronV3.cs
 - Assets/Prefabs/Tutorials/SaberThrow/Script/ThrowEnemyController.cs
 - Assets/Prefabs/Tutorials/SaberThrow/Script/TIEFighterPatrol.cs
+- Assets/Prefabs/Tutorials/SaberThrow/Script/DisableGrabInput.cs
 - Assets/Prefabs/Lightsaber/ToggleButton.cs
 - Assets/CustomInteractions/Jump.cs
 - Assets/CustomInteractions/Levitation.cs

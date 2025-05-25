@@ -5748,6 +5748,7 @@ GameObject:
   - component: {fileID: 1696158667638949912}
   - component: {fileID: 770413837531600414}
   - component: {fileID: 8428090503319945254}
+  - component: {fileID: -3400722420963841401}
   m_Layer: 0
   m_Name: Kylo Saber Blue
   m_TagString: Lightsaber
@@ -5975,6 +5976,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce8438f941982245ad794cbc48abebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3400722420963841401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5696583244388799106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490a93dc0d2937c4cbb5e437b94bc252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftGrabAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  rightGrabAction: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &5718365248096700101
 GameObject:
   m_ObjectHideFlags: 0
