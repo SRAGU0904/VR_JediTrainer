@@ -75,5 +75,8 @@ crashlytics-build.properties
 # Temporary ADB build data
 .utmp
 
+# Replay logs from Unity sessions
+replay_pid*.log
+
 # MacOS
 .DS_Store
