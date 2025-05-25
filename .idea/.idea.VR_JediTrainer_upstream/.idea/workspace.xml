@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a61581d1-ef54-477f-878e-4633508d6982" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.VR_JediTrainer_upstream/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.VR_JediTrainer_upstream/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Trainers/SlicingTutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Trainers/SlicingTutorial.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748136088965</updated>
-      <workItem from="1748136093286" duration="19577000" />
+      <workItem from="1748136093286" duration="20083000" />
     </task>
     <servers />
   </component>
@@ -145,17 +144,30 @@
           <option name="timeStamp" value="3" />
         </breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Slicing/Internal/Knife.cs</url>
-          <line>22</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Slicing/Internal/Knife.cs" containingFunctionPresentation="Method 'Slice'">
+          <url>file://$PROJECT_DIR$/Assets/Slicing/Tutorial/TutorialController.cs</url>
+          <line>28</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Slicing/Tutorial/TutorialController.cs" containingFunctionPresentation="Method 'ExecuteStageChange'">
             <startOffsets>
-              <option value="528" />
+              <option value="877" />
             </startOffsets>
             <endOffsets>
-              <option value="587" />
+              <option value="902" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="10" />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Slicing/Internal/Knife.cs</url>
+          <line>51</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Slicing/Internal/Knife.cs" containingFunctionPresentation="Method 'GetBehaviour'">
+            <startOffsets>
+              <option value="1372" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1442" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
