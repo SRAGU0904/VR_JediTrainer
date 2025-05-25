@@ -10,7 +10,7 @@ public class TutorialController : MonoBehaviour {
 	public List<GameObject> Stages;
 	private int _currentStageIndex = 0;
 	[CanBeNull] private int? _newStageIndex = null;
-	public float defaultDelay = 3f;
+	public float defaultDelay = 1.5f;
 	public float initialDelay = 5f;
 
 	private static TutorialController _instance;
@@ -26,7 +26,7 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	private IEnumerator AsyncStart() {
-		yield return new WaitForSecondsRealtime(initialDelay);
+		yield return new WaitForFixedUpdate();
 		ExecuteStageChange(_currentStageIndex);
 		StartCoroutine(Worker(defaultDelay));
 	}

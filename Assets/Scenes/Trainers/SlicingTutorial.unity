@@ -816,7 +816,7 @@ MonoBehaviour:
   angVelocityThreshold: 7
   slicerBeginEffector: {fileID: 1929789495}
   slicerEndEffector: {fileID: 1886604939}
-  aoeExpandFactor: 100
+  aoeExpandFactor: 10
   debug: 0
 --- !u!114 &386356106
 MonoBehaviour:
