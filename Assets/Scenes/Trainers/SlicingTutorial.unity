@@ -398,6 +398,7 @@ MonoBehaviour:
   - {fileID: 1608535214}
   - {fileID: 1200878925}
   defaultDelay: 3
+  initialDelay: 5
 --- !u!4 &135764304
 Transform:
   m_ObjectHideFlags: 0
@@ -830,6 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sliceCountLimit: 4
+  cooldown: 0.5
 --- !u!114 &386356107
 MonoBehaviour:
   m_ObjectHideFlags: 0
