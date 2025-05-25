@@ -36,19 +36,22 @@ public class TutorialController : MonoBehaviour {
 				return;
 			}
 			_newStageIndex = stageIndex + 1;
-			if (_newStageIndex >= Stages.Count) {
-				Debug.LogError("No more stages available!");
-				return;
-			}
 			StartCoroutine(_ChangeStageAfterDelay(delay));
 		}
 	}
-
+	
 	private IEnumerator _ChangeStageAfterDelay(float delay = 0f) {
 		yield return new WaitForSeconds(delay);
+		if (_newStageIndex > Stages.Count) {
+			Debug.Log("Tutorial completed! Going back to the Hub.");
+			CurrentStageIndex = (int)_newStageIndex;
+			_newStageIndex = null;
+			SwapScenes.GotoMainHub();
+			yield break;
+		}
 		lock (_instance) {
 			Stages[CurrentStageIndex].SetActive(false);
-			Assert.IsTrue(_newStageIndex != null, "Changing stage aborted has been aborted!?");
+			Assert.IsTrue(_newStageIndex != null, "Changing stage has been aborted!?");
 			Stages[(int)_newStageIndex].SetActive(true);
 			CurrentStageIndex = (int)_newStageIndex;
 			_newStageIndex = null;

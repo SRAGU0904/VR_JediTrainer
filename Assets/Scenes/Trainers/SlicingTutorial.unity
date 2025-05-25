@@ -233,7 +233,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5966034751122022504, guid: 95ec1a5d9e812400b8229e5f26ffd800, type: 3}
   m_PrefabInstance: {fileID: 1798334545}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &51588531
+--- !u!4 &51588536 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 951018871115914140, guid: 95ec1a5d9e812400b8229e5f26ffd800, type: 3}
+  m_PrefabInstance: {fileID: 1798334545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &51588537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,14 +247,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 51588524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed688a230e9e24d9ab1d16b4f488d9d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e021b840e61b4d30aa0b62095d63271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &51588536 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 951018871115914140, guid: 95ec1a5d9e812400b8229e5f26ffd800, type: 3}
-  m_PrefabInstance: {fileID: 1798334545}
-  m_PrefabAsset: {fileID: 0}
+  NextStageDelay: 3
+  myStage: 1
 --- !u!1 &67743555
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,7 +795,6 @@ MonoBehaviour:
   addRigidbodies: 1
   pushForceMagnitude: 1
   pushInitialInSeconds: 1
-  bounceUpVelocity: 10
 --- !u!114 &386356108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2207,7 +2208,7 @@ Transform:
   m_GameObject: {fileID: 1608535214}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -9.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2284,7 +2285,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5966034751122022504, guid: 95ec1a5d9e812400b8229e5f26ffd800, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 51588531}
+      addedObject: {fileID: 51588537}
   m_SourcePrefab: {fileID: 100100000, guid: 95ec1a5d9e812400b8229e5f26ffd800, type: 3}
 --- !u!224 &1860162899 stripped
 RectTransform:
@@ -2769,10 +2770,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addColider: 1
   addRigidbodies: 1
-  pushForceMagnitude: 1
-  pushInitialInSeconds: 1
-  bounceUpVelocity: 5
-  NextStageDelay: 10000
+  pushForceMagnitude: 2
+  pushInitialInSeconds: 3
+  NextStageDelay: 3
   myStage: 0
 --- !u!1 &1961458175 stripped
 GameObject:
