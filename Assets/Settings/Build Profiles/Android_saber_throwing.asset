@@ -20,14 +20,16 @@ MonoBehaviour:
     rid: 7841191850632282200
   m_OverrideGlobalSceneList: 1
   m_Scenes:
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/Game/MainHub.unity
+  - m_enabled: 0
+    m_path: Assets/Scenes/Game/YetAnotherHub.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Tutorials/SaberThrow_tutorial.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/Tutorials/Force_tutorial.unity
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/Tutorials/JumpTutorial.unity
+  - m_enabled: 0
+    m_path: Assets/Scenes/Tutorials/Force_tutorial.unity
   - m_enabled: 0
     m_path: Assets/Scenes/Tutorials/SlicingTutorial.unity
   m_ScriptingDefines: []

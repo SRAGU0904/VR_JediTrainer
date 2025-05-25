@@ -992,16 +992,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 544538814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ecc38eebcd85d14180062c70c906e05, type: 3}
+  m_Script: {fileID: 11500000, guid: dd3eabf9748ef9c4c845d2fba84a9185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   messages:
-  - Swing your right controller first and press A to release your lightsaber. When
-    you're ready, try throwing it at the TIE fighter above
-  - Good job! Now try throwing it at the enermies in the room.
-  - 'Now it''s the final task: eliminate all fighters and enemies in the room!'
-  - Congratulations! You've completed the training. You will return to the main hub
-    in 10 seconds.
+  - Swing your right controller first, then press the A button to release the lightsaber.
+    When you're ready, throw it at the TIE fighter above!
+  - 'Nice job! Now there are two enemies in the room. Throw your saber to take them
+    down. '
+  - This is the final task. Throw your lightsaber to eliminate all enemies and TIE
+    fighter in the room.
+  - "Well done, Jedi. You have completed this training. You\u2019ll be returned in
+    10 seconds."
   currentMessage: 0
   setToInitialMessageOnStart: 1
   targetText: {fileID: 342271400}
@@ -2157,6 +2159,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1596081690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1650580681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1650580682}
+  - component: {fileID: 1650580683}
+  m_Layer: 0
+  m_Name: Disable grabbing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1650580682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650580681}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.561434, y: 1.4840426, z: 27.848923}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1650580683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650580681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490a93dc0d2937c4cbb5e437b94bc252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftGrabAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  rightGrabAction: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1001 &1665761496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2993,3 +3041,4 @@ SceneRoots:
   - {fileID: 1461397787}
   - {fileID: 1740992129}
   - {fileID: 388393320}
+  - {fileID: 1650580682}
