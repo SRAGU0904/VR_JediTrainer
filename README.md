@@ -26,7 +26,7 @@
 - Assets/Prefabs/Tutorials/HologramTutorial.cs
 - Assets/Prefabs/JediHologram/SpinObject.cs
 - Assets/Prefabs/Tutorials/Jump/JumpTutorial.cs
-Assets/Prefabs/Tutorials/Jump/TriggerAreaDetector.cs
+- Assets/Prefabs/Tutorials/Jump/TriggerAreaDetector.cs
 
 ## Adapted scripts and assets:
 - Assets/Prefabs/Lightsaber/Kylo Saber Blue.prefab
@@ -35,7 +35,7 @@ Assets/Prefabs/Tutorials/Jump/TriggerAreaDetector.cs
 - Assets/Prefabs/Player/PhysicalCharacterController.cs
 
 ## Unmodified scripts and assets:
-- CustomInteractions/InputData.cs
+- Assets/CustomInteractions/InputData.cs
 - Assets/ExternalAssets/interactable_holocron/
 - Assets/ExternalAssets/podium/
 - Assets/Prefabs/Tutorials/SaberThrow/TieFighter.fbx
@@ -48,11 +48,11 @@ Assets/Prefabs/Tutorials/Jump/TriggerAreaDetector.cs
 
 # Relevant scripts and assets for each custom feature:
 ## Force Pull Push:
-- CustomInteractions/Force.cs
+- Assets/CustomInteractions/Force.cs
 - Assets/Prefabs/ForceObject/ForceObjectHandler.cs
 ## Force Jump:
 - Assets/CustomInteractions/Jump.cs
 - Assets/CustomInteractions/Levitation.cs
 ## Lightsaber Throw:
-- CustomInteractions/SaberThrow.cs
+- Assets/CustomInteractions/SaberThrow.cs
 ## Lightsaber Cutting:
