@@ -3417,52 +3417,8 @@
         {
             "name": "Composite",
             "id": "d1ac6636-50f2-46fe-afe0-78539f4a7f54",
-            "actions": [
-                {
-                    "name": "Levitate",
-                    "type": "Button",
-                    "id": "8402e5a1-f9c1-4e2f-bb52-185d7bc754b5",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "One Modifier",
-                    "id": "12d612b8-b0d5-49ce-99a8-08cce02d2d89",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Levitate",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "b9beff12-39bf-4e88-913b-44c1d77056f9",
-                    "path": "<XRController>{LeftHand}/{GripButton}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Levitate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "977443d9-de0a-416b-9780-9809683ccdbe",
-                    "path": "<XRController>{RightHand}/{GripButton}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Levitate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                }
-            ]
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []
