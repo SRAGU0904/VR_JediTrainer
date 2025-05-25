@@ -1757,10 +1757,9 @@ MonoBehaviour:
   text: {fileID: 5541412809575682946}
   completedText: 'Congrats!
 
-    You have completed the tutorial.
+    Tutorial completed.
 
-    Teleporting
-    back to the hub.'
+    Teleporting...'
 --- !u!1 &1232006438
 GameObject:
   m_ObjectHideFlags: 0
