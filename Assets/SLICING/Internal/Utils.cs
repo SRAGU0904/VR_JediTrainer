@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Assertions;
+using Object = UnityEngine.Object;
 
 public class Plane {
 	public Vector3 center { get; }
@@ -114,4 +117,11 @@ public class MeshUtils : MonoBehaviour
 }
 
 
-	
+public class UnityUtils : MonoBehaviour {
+	[CanBeNull]
+	public static T GetSingleton<T>() where T : Object {
+		T[] instances = FindObjectsByType<T>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+		Assert.IsTrue(instances.Length <= 1, $"Found more than one singleton {typeof(T).Name}!");
+		return instances.FirstOrDefault();
+	}
+}

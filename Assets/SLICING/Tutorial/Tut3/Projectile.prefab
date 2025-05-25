@@ -9764,11 +9764,11 @@ GameObject:
   - component: {fileID: 7866890756338442843}
   - component: {fileID: 4820406060900721790}
   - component: {fileID: 3535628502172844651}
-  - component: {fileID: 1006310643757989173}
   - component: {fileID: 7553678597523583282}
-  - component: {fileID: 2590154884982202769}
+  - component: {fileID: 2207032044261649245}
+  - component: {fileID: 8609644110438095112}
   m_Layer: 9
-  m_Name: OrbCrackable
+  m_Name: Projectile
   m_TagString: SliceTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14615,20 +14615,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.2826862
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1006310643757989173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5966034751122022504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d70a985263f7247b01ea6a8a53e385, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  lifetime: 20
 --- !u!114 &7553678597523583282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14641,12 +14627,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694d5d21759554c5a90daa0b34e19f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angleTolerance: 10
-  distTolerance: 0.5
+  angleTolerance: 25
+  distTolerance: 5
   swingTargetObj: {fileID: 9047757603269741534}
   swingTargetDir: {x: 1, y: 0, z: 0}
   sliceNormalDir: {x: 0, y: 1, z: 0}
---- !u!114 &2590154884982202769
+--- !u!114 &2207032044261649245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14655,9 +14641,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 5966034751122022504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed688a230e9e24d9ab1d16b4f488d9d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c0a86321548a4ebaa2e7462581761d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  addColider: 1
+  addRigidbodies: 1
+  pushForceMagnitude: 2
+  pushInitialInSeconds: 3
+--- !u!114 &8609644110438095112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5966034751122022504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de3d3526fc83409c86516bc31a67f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  lifetime: 20
+  keepDistance: 2
+  farAwayMultiplier: 5
+  baseSpeed: 1
 --- !u!1 &7566997172301413461
 GameObject:
   m_ObjectHideFlags: 0

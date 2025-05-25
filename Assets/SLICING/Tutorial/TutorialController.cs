@@ -9,6 +9,7 @@ using UnityEngine.Assertions;
 public class TutorialController : MonoBehaviour {
 	public List<GameObject> Stages;
 	public int CurrentStageIndex = 0;
+	public float defaultDelay = 3f;
 
 	private static TutorialController _instance;
 	[CanBeNull] private int? _newStageIndex = null;
@@ -20,13 +21,15 @@ public class TutorialController : MonoBehaviour {
 	}
 
 	private void Start() {
-		Stages[0].SetActive(true);
-		for (int i = 1; i < Stages.Count; i++) {
-			Stages[i].SetActive(false);
+		Stages[CurrentStageIndex].SetActive(true);
+		for (int i = 0; i < Stages.Count; i++) {
+			if (i != CurrentStageIndex) {
+				Stages[i].SetActive(false);
+			}
 		}
 	}
 
-	private void _StageFinished(int stageIndex, float delay = 0f) {
+	private void _StageFinished(int stageIndex, float delay) {
 		lock (_instance) {
 			if (stageIndex < CurrentStageIndex) {
 				return;
@@ -42,7 +45,7 @@ public class TutorialController : MonoBehaviour {
 	
 	private IEnumerator _ChangeStageAfterDelay(float delay = 0f) {
 		yield return new WaitForSeconds(delay);
-		if (_newStageIndex > Stages.Count) {
+		if (_newStageIndex >= Stages.Count) {
 			Debug.Log("Tutorial completed! Going back to the Hub.");
 			CurrentStageIndex = (int)_newStageIndex;
 			_newStageIndex = null;
@@ -58,8 +61,20 @@ public class TutorialController : MonoBehaviour {
 		}
 	}
 	
-	public static void StageFinished(int stageIndex, float delay) {
-		_instance._StageFinished(stageIndex, delay);
+	public static void StageFinished(int stageIndex, float? delay = null) {
+		_instance._StageFinished(stageIndex, delay.GetValueOrDefault(_instance.defaultDelay));
+	}
+
+	[CanBeNull]
+	public static GameObject GetMyStage(GameObject caller) {
+		while (caller != null) {
+			if (_instance.Stages.Contains(caller)) {
+				return caller;
+			}
+			caller = caller.transform.parent.gameObject;
+		}
+
+		return caller;
 	}
 }
 
