@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Assertions;
+using Object = UnityEngine.Object;
 
 public class Plane {
 	public Vector3 center { get; }
@@ -114,4 +117,39 @@ public class MeshUtils : MonoBehaviour
 }
 
 
+public class UnityUtils : MonoBehaviour {
+	[CanBeNull]
+	public static T GetSingleton<T>() where T : Object {
+		T[] instances = FindObjectsByType<T>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+		Assert.IsTrue(instances.Length <= 1, $"Found more than one singleton {typeof(T).Name}!");
+		return instances.FirstOrDefault();
+	}
+
+	private static IEnumerator _TagAfterDelay(GameObject go, float delay, string tag) {
+		yield return new WaitForSeconds(delay);
+		go.tag = tag;
+	}
+
+	public static void TagAfterDelay(GameObject go, float delay, string tag) {
+		UnityUtilsSingleton.StartCoroutine_(_TagAfterDelay(go, delay, tag));
+	}
+}
+
+public class UnityUtilsSingleton : MonoBehaviour {
+	private static GameObject _go = null;
+	private static UnityUtilsSingleton _instance = null;
+
+	public static Tuple<GameObject, UnityUtilsSingleton> GetInstance() {
+		if (!_go) {
+			_go = new GameObject("UnityUtilsSingleton");
+			_instance = _go.AddComponent<UnityUtilsSingleton>();
+		}
+		return new Tuple<GameObject, UnityUtilsSingleton>(_go, _instance);
+	}
 	
+	public static void StartCoroutine_(IEnumerator routine) {
+		GetInstance();
+		_instance.StartCoroutine(routine);
+	}
+	
+}

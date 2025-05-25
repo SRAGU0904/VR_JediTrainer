@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour {
 		Destroy(gameObject, lifetime); // Destroy after a delay
 	}
 
-	void Update() {
+	protected void Update() {
 		transform.Translate(Vector3.forward * speed * Time.deltaTime);
 	}
 

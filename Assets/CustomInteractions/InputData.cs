@@ -1,4 +1,4 @@
-// Stole this from https://www.youtube.com/watch?v=Kh_94glqO-0
+ // Stole this from https://www.youtube.com/watch?v=Kh_94glqO-0
 // Very useful for capturing Input Data such as Controller Velocity / Position
 // Like this:  inputData._leftController.TryGetFeatureValue(CommonUsages.triggerButton, out bool isPressed);
 

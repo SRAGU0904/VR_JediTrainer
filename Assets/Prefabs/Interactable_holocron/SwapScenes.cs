@@ -3,21 +3,21 @@ using UnityEngine.SceneManagement;
 public class SwapScenes : MonoBehaviour
 {
 	public static void GotoMainHub() {
-		SceneManager.LoadScene(0);
+		SceneManager.LoadScene("MainHubArea");
 	}
 	public static void GotoForce() {
-		SceneManager.LoadScene(2);
+		SceneManager.LoadScene("Force_tutorial");
 	}
 
 	public static void GotoJump() {
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene("JumpTutorial");
 	}
 
 	public static void GotoSaberThrow() {
-		SceneManager.LoadScene(3);
+		SceneManager.LoadScene("SaberThrow_tutorial");
 	}
 
 	public static void GotoSaberCut() { 
-		SceneManager.LoadScene(4);
+		SceneManager.LoadScene("SlicingTutorial");
 	}
 }
